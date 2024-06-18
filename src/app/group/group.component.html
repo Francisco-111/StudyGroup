@@ -1,1 +1,22 @@
-<p>group works!</p>
+<div class="group-container">
+  <h2>Create Group</h2>
+  <form (ngSubmit)="onCreateGroup()">
+    <div>
+      <label for="groupName">Group Name:</label>
+      <input type="text" id="groupName" [(ngModel)]="groupName" name="groupName" required>
+    </div>
+    <div>
+      <label for="members">Members (comma separated emails):</label>
+      <input type="text" id="members" [(ngModel)]="members" name="members" required>
+    </div>
+    <button type="submit">Create Group</button>
+  </form>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <h2>Your Groups</h2>
+  <ul>
+    <li *ngFor="let group of groups">
+      {{ group.groupName }} - {{ group.members.join(', ') }}
+    </li>
+  </ul>
+</div>

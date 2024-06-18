@@ -1,0 +1,26 @@
+<div class="schedule-container">
+  <h2>Schedule Event</h2>
+  <form (ngSubmit)="onCreateSchedule()">
+    <div>
+      <label for="eventName">Event Name:</label>
+      <input type="text" id="eventName" [(ngModel)]="eventName" name="eventName" required>
+    </div>
+    <div>
+      <label for="eventDate">Event Date:</label>
+      <input type="date" id="eventDate" [(ngModel)]="eventDate" name="eventDate" required>
+    </div>
+    <div>
+      <label for="eventTime">Event Time:</label>
+      <input type="time" id="eventTime" [(ngModel)]="eventTime" name="eventTime" required>
+    </div>
+    <button type="submit">Schedule Event</button>
+  </form>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <h2>Scheduled Events</h2>
+  <ul>
+    <li *ngFor="let schedule of schedules">
+      {{ schedule.eventName }} - {{ schedule.eventDate }} at {{ schedule.eventTime }}
+    </li>
+  </ul>
+</div>

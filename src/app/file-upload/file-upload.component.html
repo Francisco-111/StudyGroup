@@ -1,0 +1,13 @@
+<div class="file-upload-container">
+  <h2>Upload File</h2>
+  <form (ngSubmit)="onUploadFile()">
+    <div>
+      <input type="file" (change)="onFileSelected($event)" required>
+    </div>
+    <button type="submit">Upload</button>
+  </form>
+  <div *ngIf="downloadURL" class="download-link">
+    File uploaded successfully. <a [href]="downloadURL" target="_blank">Download File</a>
+  </div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>

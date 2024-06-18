@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,10 +10,18 @@ import { AuthService } from '../services/auth.service';
 export class RegisterComponent {
   email: string = '';
   password: string = '';
+  errorMessage: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
-  register() {
-    this.authService.register(this.email, this.password);
+  onRegister() {
+    this.authService.register(this.email, this.password).then(
+      () => {
+        this.router.navigate(['/groups']);
+      },
+      (error) => {
+        this.errorMessage = error.message;
+      }
+    );
   }
 }

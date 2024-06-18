@@ -1,4 +1,4 @@
-.group-container, .schedule-container {
+.file-upload-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -14,10 +14,6 @@ div {
   margin-bottom: 10px;
 }
 
-label {
-  display: block;
-}
-
 input, button {
   width: 100%;
   padding: 8px;
@@ -31,20 +27,13 @@ button {
   border-radius: 5px;
 }
 
+.download-link {
+  margin-top: 10px;
+  text-align: center;
+}
+
 .error-message {
   color: red;
   text-align: center;
   margin-top: 10px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  background-color: #f8f8f8;
-  padding: 10px;
-  margin-bottom: 5px;
-  border-radius: 5px;
 }

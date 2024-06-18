@@ -1,4 +1,4 @@
-.group-container, .schedule-container {
+.chat-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -10,21 +10,27 @@ h2 {
   text-align: center;
 }
 
-div {
+.messages {
   margin-bottom: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
-label {
-  display: block;
+form {
+  display: flex;
 }
 
-input, button {
-  width: 100%;
+input {
+  flex: 1;
   padding: 8px;
   box-sizing: border-box;
+  margin-right: 10px;
 }
 
 button {
+  padding: 10px;
   background-color: #007bff;
   color: white;
   border: none;
@@ -35,16 +41,4 @@ button {
   color: red;
   text-align: center;
   margin-top: 10px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  background-color: #f8f8f8;
-  padding: 10px;
-  margin-bottom: 5px;
-  border-radius: 5px;
 }

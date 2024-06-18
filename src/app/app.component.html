@@ -1,6 +1,8 @@
-<nav>
-  <a routerLink="/">Home</a>
-  <a routerLink="/login">Login</a>
-  <a routerLink="/register">Register</a>
+<nav *ngIf="userLoggedIn">
+  <ul>
+    <li><a routerLink="/groups">Groups</a></li>
+    <li><a routerLink="/file-upload">File Upload</a></li>
+    <li><a (click)="logout()">Logout</a></li>
+  </ul>
 </nav>
 <router-outlet></router-outlet>
