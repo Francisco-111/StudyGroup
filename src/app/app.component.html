@@ -1,9 +1,17 @@
-<nav *ngIf="userLoggedIn">
-  <ul>
-    <li><a routerLink="/groups">Groups</a></li>
-    <li><a routerLink="/file-upload">File Upload</a></li>
-    <li><a routerLink="/user-list">Users</a></li>
-    <li><a (click)="logout()">Logout</a></li>
-  </ul>
-</nav>
-<router-outlet></router-outlet>
+<!-- app.component.html -->
+<div class="container">
+  <button class="nav-toggle" (click)="toggleNav()">☰</button>
+  <nav class="sidenav" [class.open]="isNavOpen" *ngIf="userLoggedIn">
+    <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/groups">Groups</a></li>
+      <li><a routerLink="/profile">Profile</a></li>
+      <li><a routerLink="/file-upload">File Upload</a></li>
+      <li><a routerLink="/user-list">Users</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+  </nav>
+  <div class="main" [class.shifted]="isNavOpen">
+    <router-outlet></router-outlet>
+  </div>
+</div>

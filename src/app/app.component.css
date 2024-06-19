@@ -1,13 +1,100 @@
-nav {
+/* app.component.css */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
   display: flex;
-  gap: 10px;
+  height: 100%;
+  overflow: hidden;
 }
 
-nav a {
+.nav-toggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 25px;
+  background: none;
+  border: none;
+  color: #ff0000;
+  cursor: pointer;
+  z-index: 1001;
+  transition: left 0.3s;
+}
+
+.sidenav {
+  height: 100%;
+  width: 150px; /* Adjust width as needed for open state */
+  position: fixed;
+  top: 0;
+  left: -270px; /* Initially hidden off-screen */
+  background-color: #111;
+  overflow-x: hidden;
+  transition: left 0.6s;
+  z-index: 1000;
+  padding-top: 60px;
+}
+
+.sidenav.open {
+  left: 0;
+}
+
+.sidenav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidenav ul li {
+  padding: 8px 16px;
+  text-align: center;
+}
+
+.sidenav ul li a {
   text-decoration: none;
-  color: #007bff;
+  color: white;
+  display: block;
+  font-size: 18px; /* Increase font size */
+  line-height: 1.5; /* Set line height to 1.5 for spacing */
+  transition: 0.3s;
 }
 
-nav a:hover {
-  text-decoration: underline;
+.sidenav ul li a:hover {
+  background-color: #575757;
+}
+
+.main {
+  flex-grow: 1;
+  padding: 16px;
+  transition: margin-left 0.3s;
+  margin-left: 0; /* Initially no margin */
+  width: 100%;
+}
+
+.main.shifted {
+  margin-left: 170px; /* Same as the width of the sidenav when open */
+}
+
+@media screen and (max-width: 768px) {
+  .sidenav {
+    width: 200px; /* Adjust width as needed for open state on small screens */
+    left: -200px; /* Initially hidden off-screen */
+  }
+
+  .sidenav.open {
+    left: 0;
+  }
+
+  .nav-toggle {
+    left: 10px; /* Keep hamburger menu on screen */
+  }
+
+  .main {
+    margin-left: 0; /* Initially no margin */
+  }
+
+  .main.shifted {
+    margin-left: 200px; /* Adjust margin as needed for open state on small screens */
+  }
 }

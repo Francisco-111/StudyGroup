@@ -1,0 +1,22 @@
+<!-- profile.component.html -->
+<div *ngIf="user$ | async as user">
+  <h2>{{ user.displayName }}'s Profile</h2>
+  <div>
+    <h3>Your Chats</h3>
+    <ul>
+      <li *ngFor="let chat of chats$ | async">{{ chat.title }}</li> <!-- Adjust as per your chat data structure -->
+    </ul>
+  </div>
+  <div>
+    <h3>Your Groups</h3>
+    <ul>
+      <li *ngFor="let group of groups$ | async">{{ group.groupName }}</li> <!-- Adjust as per your group data structure -->
+    </ul>
+  </div>
+  <div>
+    <h3>Your Files</h3>
+    <ul>
+      <li *ngFor="let file of files$ | async">{{ file.name }}</li> <!-- Adjust as per your file data structure -->
+    </ul>
+  </div>
+</div>

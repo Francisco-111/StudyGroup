@@ -22,6 +22,8 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {HomeComponent} from "./home/home.component";
+import {ProfileComponent} from "./profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
     FileUploadComponent,
     GroupChatComponent,
     DirectChatComponent,
-    UserListComponent
+    UserListComponent,
+    HomeComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    FormsModule
+    FormsModule,
+
   ],
   providers: [
     AuthService,

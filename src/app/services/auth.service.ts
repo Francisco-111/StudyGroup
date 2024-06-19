@@ -1,22 +1,29 @@
+// auth.service.ts
 import { Injectable } from '@angular/core';
-import firebase from 'firebase/app';
-import {AngularFireAuth} from "@angular/fire/compat/auth";
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable } from 'rxjs';
+import firebase from "firebase/compat/app";
+import {Router} from "@angular/router";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthService {
-    constructor(public afAuth: AngularFireAuth) { }
+  user$: Observable<firebase.User | null>;
 
-    login(email: string, password: string) {
-        return this.afAuth.signInWithEmailAndPassword(email, password);
-    }
+  constructor(public afAuth: AngularFireAuth, private router: Router) {
+    this.user$ = this.afAuth.authState;
+  }
 
-    register(email: string, password: string) {
-        return this.afAuth.createUserWithEmailAndPassword(email, password);
-    }
+  login(email: string, password: string) {
+    return this.afAuth.signInWithEmailAndPassword(email, password);
+  }
 
-    logout() {
-        return this.afAuth.signOut();
-    }
+  register(email: string, password: string) {
+    return this.afAuth.createUserWithEmailAndPassword(email, password);
+  }
+
+  logout() {
+    return this.afAuth.signOut();
+  }
 }

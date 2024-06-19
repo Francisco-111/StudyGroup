@@ -1,7 +1,19 @@
-<div class="home-container">
-    <h1>Welcome to Study Group App</h1>
+<!-- home.component.html -->
+<div *ngIf="user$ | async as user; else loginRegister">
+  <div class="home-container">
+    <h1>Welcome to Study Group Website</h1>
     <div class="button-container">
-        <button routerLink="/login">Login</button>
-        <button routerLink="/register">Register</button>
+      <button routerLink="/profile">Profile</button>
+      <button (click)="authService.logout()">Logout</button>
     </div>
+  </div>
 </div>
+<ng-template #loginRegister>
+  <div class="home-container">
+    <h1>Welcome to Study Group Website</h1>
+    <div class="button-container">
+      <button routerLink="/login">Login</button>
+      <button routerLink="/register">Register</button>
+    </div>
+  </div>
+</ng-template>

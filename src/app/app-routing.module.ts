@@ -10,11 +10,13 @@ import { GroupChatComponent } from './group-chat/group-chat.component';
 import { DirectChatComponent } from './direct-chat/direct-chat.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { AuthGuard } from './auth.guard';
+import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'groups', component: GroupComponent, canActivate: [AuthGuard] },
   { path: 'groups/:id/schedules', component: ScheduleComponent, canActivate: [AuthGuard] },
   { path: 'file-upload', component: FileUploadComponent, canActivate: [AuthGuard] },
