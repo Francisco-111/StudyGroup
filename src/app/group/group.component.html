@@ -1,22 +1,30 @@
+<!-- group.component.html -->
 <div class="group-container">
-  <h2>Your Groups</h2>
-  <form (ngSubmit)="onCreateGroup()">
-    <label for="groupName">Group Name:</label>
-    <input type="text" id="groupName" [(ngModel)]="groupName" name="groupName" required>
-    <button type="submit">Create Group</button>
-  </form>
-  <div *ngIf="createGroupErrorMessage" class="error-message">{{ createGroupErrorMessage }}</div>
-  <ul>
-    <li *ngFor="let group of groups">
-      {{ group.groupName }} - Members: {{ group.members.length }}
-      <ng-container *ngIf="group.members.includes(userEmail); else notMember">
-        <button (click)="leaveGroup(group.id)">Leave Group</button>
-        <a [routerLink]="['/groups', group.id, 'chat']">Chat</a>
-        <a [routerLink]="['/groups', group.id, 'schedules']">Schedules</a>
-      </ng-container>
-      <ng-template #notMember>
-        <button (click)="joinGroup(group.id)">Join Group</button>
-      </ng-template>
-    </li>
-  </ul>
+  <div class="group-list">
+    <h2>Groups</h2>
+    <ul>
+      <li *ngFor="let group of groups">
+        {{ group.groupName }} - Members: {{ group.members.length }}
+        <div class="group-actions">
+          <ng-container *ngIf="group.members.includes(userEmail); else notMember">
+            <button (click)="leaveGroup(group.id)">Leave Group</button>
+            <button (click)="navigateToGroupChat(group.id)">Chat</button>
+            <button (click)="navigateToGroupSchedules(group.id)">Schedules</button>
+          </ng-container>
+          <ng-template #notMember>
+            <button (click)="joinGroup(group.id)">Join Group</button>
+          </ng-template>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="group-form">
+    <h2>Create Group</h2>
+    <form (ngSubmit)="onCreateGroup()">
+      <label for="groupName">Group Name:</label>
+      <input type="text" id="groupName" [(ngModel)]="groupName" name="groupName" required>
+      <button type="submit" class="create-btn">Create Group</button>
+    </form>
+    <div *ngIf="createGroupErrorMessage" class="error-message">{{ createGroupErrorMessage }}</div>
+  </div>
 </div>

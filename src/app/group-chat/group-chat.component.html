@@ -1,25 +1,30 @@
+<!-- chat.component.html -->
 <div *ngIf="isMember" class="chat-container">
-  <h2>Group Chat</h2>
-  <div class="messages">
-    <div *ngFor="let message of messages">
-      <strong>{{ message.sender }}:</strong> {{ message.text }}
+  <div class="chat-section">
+    <h2>Group Chat</h2>
+    <div class="messages">
+      <div *ngFor="let message of messages">
+        <strong>{{ message.sender }}:</strong> {{ message.text }}
+      </div>
     </div>
+    <form (ngSubmit)="onSendMessage()">
+      <input type="text" [(ngModel)]="messageText" name="messageText" placeholder="Enter your message" required>
+      <button type="submit" class="send-btn">Send</button>
+    </form>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
   </div>
-  <form (ngSubmit)="onSendMessage()">
-    <input type="text" [(ngModel)]="messageText" name="messageText" placeholder="Enter your message" required>
-    <button type="submit">Send</button>
-  </form>
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-
-  <h2>Upload File</h2>
-  <input type="file" (change)="onFileSelected($event)">
-  <button (click)="onUploadFile()">Upload</button>
-
-  <h2>Files</h2>
-  <div class="files">
-    <div *ngFor="let file of files">
-      <strong>{{ file.uploadedBy }}:</strong>
-      <a [href]="file.url" target="_blank">{{ file.name }}</a>
+  <div class="file-section">
+    <h2>Upload File</h2>
+    <div class="file-upload">
+      <input type="file" (change)="onFileSelected($event)">
+      <button (click)="onUploadFile()" class="upload-btn">Upload</button>
+    </div>
+    <h2>Files</h2>
+    <div class="files">
+      <div *ngFor="let file of files">
+        <strong>{{ file.uploadedBy }}:</strong>
+        <a [href]="file.url" target="_blank">{{ file.name }}</a>
+      </div>
     </div>
   </div>
 </div>

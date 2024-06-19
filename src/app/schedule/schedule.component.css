@@ -1,52 +1,76 @@
+/* schedule.component.css */
 .schedule-container {
-  max-width: 600px;
-  margin: 0 auto;
+  display: flex;
+  gap: 20px;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
 }
 
-h2 {
-  text-align: center;
+.schedule-list {
+  flex: 1;
+  max-width: 400px; /* Adjust width as needed */
 }
 
-div {
-  margin-bottom: 10px;
-}
-
-label {
-  display: block;
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-ul {
+.schedule-list ul {
   list-style-type: none;
   padding: 0;
 }
 
-li {
-  background-color: #f8f8f8;
+.schedule-list li {
+  background: #f9f9f9;
+  border: 1px solid #ccc;
   padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.schedule-form {
+  flex: 2;
+  max-width: 600px;
+  margin-left: 300px; /* Shift the form to the right */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
   margin-bottom: 5px;
-  border-radius: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group.description-group textarea {
+  width: calc(100% + 16px); /* Make the description box wider */
+  height: 100px; /* Make the description box taller */
+  margin-left: -8px; /* Adjust for padding */
+}
+
+.create-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create-btn:hover {
+  background-color: #0056b3;
 }
 
 .error-message {
   color: red;
-  text-align: center;
   margin-top: 10px;
+  font-size: 14px;
 }

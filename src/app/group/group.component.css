@@ -1,62 +1,91 @@
+/* group.component.css */
 .group-container {
-  max-width: 600px;
-  margin: 0 auto;
+  display: flex;
+  gap: 20px;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
 }
 
-h2 {
-  text-align: center;
+.group-list {
+  flex: 1;
+  max-width: 400px; /* Adjust width as needed */
 }
 
-form {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-}
-
-button {
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-ul {
+.group-list ul {
   list-style-type: none;
   padding: 0;
 }
 
-li {
-  background-color: #f8f8f8;
+.group-list li {
+  background: #f9f9f9;
+  border: 1px solid #ccc;
   padding: 10px;
-  margin-bottom: 5px;
-  border-radius: 5px;
+  margin-bottom: 10px;
+  border-radius: 4px;
 }
 
-a {
-  margin-left: 10px;
+.group-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.group-actions button {
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.group-actions button:hover {
+  background-color: #0056b3;
+}
+
+.group-form {
+  flex: 2;
+  max-width: 600px;
+  margin-left: 350px; /* Shift the form to the right */
+}
+
+.group-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.group-form label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.group-form input {
+  width: 96.75%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.create-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create-btn:hover {
+  background-color: #0056b3;
 }
 
 .error-message {
   color: red;
-  text-align: center;
   margin-top: 10px;
+  font-size: 14px;
 }

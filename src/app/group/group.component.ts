@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupService } from '../services/group.service';
 import { AuthService } from '../services/auth.service';
+import {ActivatedRoute, Router} from "@angular/router";
+import {ScheduleService} from "../services/schedule.service";
 
 @Component({
   selector: 'app-group',
@@ -13,8 +15,14 @@ export class GroupComponent implements OnInit {
   groupName: string = '';
   createGroupErrorMessage: string = '';
 
-  constructor(private groupService: GroupService, private authService: AuthService) {
-    this.authService.afAuth.authState.subscribe(user => {
+  constructor(
+    private groupService: GroupService,
+    private scheduleService: ScheduleService,
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.authService.user$.subscribe(user => {
       this.userEmail = user?.email || '';
     });
   }
@@ -53,5 +61,12 @@ export class GroupComponent implements OnInit {
         console.error('Error leaving group:', error);
       });
     }
+  }
+  navigateToGroupChat(groupId: string) {
+    this.router.navigate(['/groups', groupId, 'chat']);
+  }
+
+  navigateToGroupSchedules(groupId: string) {
+    this.router.navigate(['/groups', groupId, 'schedules']);
   }
 }

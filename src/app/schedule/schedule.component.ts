@@ -10,7 +10,10 @@ import { ScheduleService } from '../services/schedule.service';
 export class ScheduleComponent implements OnInit {
   eventName: string = '';
   eventDate: string = '';
-  eventTime: string = '';
+  eventTime: string = ''; // Optional, can be empty
+  startTime: string = ''; // Optional, can be empty
+  endTime: string = ''; // Optional, can be empty
+  eventDescription: string = ''; // Optional, can be empty
   errorMessage: string = '';
   schedules: any[] = [];
   groupId: string = '';
@@ -26,17 +29,23 @@ export class ScheduleComponent implements OnInit {
   }
 
   onCreateSchedule() {
-    if (this.eventName && this.eventDate && this.eventTime) {
+    if (this.eventName && this.eventDate) {
       const schedule = {
         eventName: this.eventName,
         eventDate: this.eventDate,
-        eventTime: this.eventTime
+        eventTime: this.eventTime || null,
+        startTime: this.startTime || null,
+        endTime: this.endTime || null,
+        eventDescription: this.eventDescription || null
       };
       this.scheduleService.createSchedule(this.groupId, schedule).then(
         () => {
           this.eventName = '';
           this.eventDate = '';
           this.eventTime = '';
+          this.startTime = '';
+          this.endTime = '';
+          this.eventDescription = '';
         },
         (error) => {
           this.errorMessage = error.message;
