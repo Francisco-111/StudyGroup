@@ -1,18 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GroupService } from '../services/group.service';
-import {NgForOf, NgIf} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import { ScheduleService } from '../services/schedule.service';
 
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
-  standalone: true,
-  imports: [
-    NgIf,
-    FormsModule,
-    NgForOf
-  ],
   styleUrls: ['./schedule.component.css']
 })
 export class ScheduleComponent implements OnInit {
@@ -23,36 +15,33 @@ export class ScheduleComponent implements OnInit {
   schedules: any[] = [];
   groupId: string = '';
 
-  constructor(private groupService: GroupService, private route: ActivatedRoute) {
+  constructor(private scheduleService: ScheduleService, private route: ActivatedRoute) {
     this.groupId = this.route.snapshot.paramMap.get('id') || '';
   }
 
   ngOnInit() {
-    this.groupService.getSchedules(this.groupId).subscribe((data: any) => {
-      this.schedules = data.map((e: any) => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        };
-      });
+    this.scheduleService.getSchedules(this.groupId).subscribe((data: any) => {
+      this.schedules = data;
     });
   }
 
   onCreateSchedule() {
-    const schedule = {
-      eventName: this.eventName,
-      eventDate: this.eventDate,
-      eventTime: this.eventTime
-    };
-    this.groupService.createSchedule(this.groupId, schedule).then(
-      () => {
-        this.eventName = '';
-        this.eventDate = '';
-        this.eventTime = '';
-      },
-      (error) => {
-        this.errorMessage = error.message;
-      }
-    );
+    if (this.eventName && this.eventDate && this.eventTime) {
+      const schedule = {
+        eventName: this.eventName,
+        eventDate: this.eventDate,
+        eventTime: this.eventTime
+      };
+      this.scheduleService.createSchedule(this.groupId, schedule).then(
+        () => {
+          this.eventName = '';
+          this.eventDate = '';
+          this.eventTime = '';
+        },
+        (error) => {
+          this.errorMessage = error.message;
+        }
+      );
+    }
   }
 }

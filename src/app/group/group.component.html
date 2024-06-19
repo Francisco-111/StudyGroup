@@ -1,22 +1,22 @@
 <div class="group-container">
-  <h2>Create Group</h2>
+  <h2>Your Groups</h2>
   <form (ngSubmit)="onCreateGroup()">
-    <div>
-      <label for="groupName">Group Name:</label>
-      <input type="text" id="groupName" [(ngModel)]="groupName" name="groupName" required>
-    </div>
-    <div>
-      <label for="members">Members (comma separated emails):</label>
-      <input type="text" id="members" [(ngModel)]="members" name="members" required>
-    </div>
+    <label for="groupName">Group Name:</label>
+    <input type="text" id="groupName" [(ngModel)]="groupName" name="groupName" required>
     <button type="submit">Create Group</button>
   </form>
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-
-  <h2>Your Groups</h2>
+  <div *ngIf="createGroupErrorMessage" class="error-message">{{ createGroupErrorMessage }}</div>
   <ul>
     <li *ngFor="let group of groups">
-      {{ group.groupName }} - {{ group.members.join(', ') }}
+      {{ group.groupName }} - Members: {{ group.members.length }}
+      <ng-container *ngIf="group.members.includes(userEmail); else notMember">
+        <button (click)="leaveGroup(group.id)">Leave Group</button>
+        <a [routerLink]="['/groups', group.id, 'chat']">Chat</a>
+        <a [routerLink]="['/groups', group.id, 'schedules']">Schedules</a>
+      </ng-container>
+      <ng-template #notMember>
+        <button (click)="joinGroup(group.id)">Join Group</button>
+      </ng-template>
     </li>
   </ul>
 </div>

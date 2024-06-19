@@ -6,7 +6,9 @@ import { RegisterComponent } from './register/register.component';
 import { GroupComponent } from './group/group.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-import { ChatComponent } from './chat/chat.component';
+import { GroupChatComponent } from './group-chat/group-chat.component';
+import { DirectChatComponent } from './direct-chat/direct-chat.component';
+import { UserListComponent } from './user-list/user-list.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -16,7 +18,9 @@ const routes: Routes = [
   { path: 'groups', component: GroupComponent, canActivate: [AuthGuard] },
   { path: 'groups/:id/schedules', component: ScheduleComponent, canActivate: [AuthGuard] },
   { path: 'file-upload', component: FileUploadComponent, canActivate: [AuthGuard] },
-  { path: 'groups/:id/chat', component: ChatComponent, canActivate: [AuthGuard] }
+  { path: 'groups/:id/chat', component: GroupChatComponent, canActivate: [AuthGuard] },
+  { path: 'chat/:id', component: DirectChatComponent, canActivate: [AuthGuard] },
+  { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

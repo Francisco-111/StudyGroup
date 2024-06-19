@@ -19,7 +19,7 @@ export class FileUploadComponent {
 
   onUploadFile() {
     if (this.selectedFile) {
-      const filePath = `uploads/${this.selectedFile.name}`;
+      const filePath = 'uploads/' + this.selectedFile.name;
       this.fileService.uploadFile(filePath, this.selectedFile).subscribe(
         (url: string) => {
           this.downloadURL = url;

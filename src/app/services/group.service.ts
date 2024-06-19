@@ -1,25 +1,52 @@
-import { Injectable } from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
+import firebase from 'firebase/compat/app';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class GroupService {
-    constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) {}
 
-    createGroup(groupName: string, members: string[]) {
-        return this.firestore.collection('groups').add({ groupName, members });
-    }
+  createGroup(groupName: string, userEmail: string) {
+    return this.firestore.collection("groups").add({
+      groupName,
+      members: [userEmail],
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
 
-    getGroups() {
-        return this.firestore.collection('groups').snapshotChanges();
-    }
+  getGroups(): Observable<any[]> {
+    return this.firestore.collection("groups").snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        // @ts-ignore
+        return { id, ...data };
+      }))
+    );
+  }
 
-    createSchedule(groupId: string, schedule: any) {
-        return this.firestore.collection(`groups/${groupId}/schedules`).add(schedule);
-    }
+  joinGroup(groupId: string, userEmail: string) {
+    return this.firestore.collection("groups").doc(groupId).update({
+      members: firebase.firestore.FieldValue.arrayUnion(userEmail)
+    });
+  }
 
-    getSchedules(groupId: string) {
-        return this.firestore.collection(`groups/${groupId}/schedules`).snapshotChanges();
-    }
+  leaveGroup(groupId: string, userEmail: string) {
+    return this.firestore.collection("groups").doc(groupId).update({
+      members: firebase.firestore.FieldValue.arrayRemove(userEmail)
+    });
+  }
+
+  isMember(groupId: string, userEmail: string): Observable<boolean> {
+    return this.firestore.collection("groups").doc(groupId).valueChanges().pipe(
+      map((doc: any) => {
+        const data = doc;
+        return data?.members.includes(userEmail) || false;
+      })
+    );
+  }
 }
