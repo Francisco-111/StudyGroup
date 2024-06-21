@@ -16,9 +16,10 @@
         {{ group.groupName }} - Members: {{ group.members.length }}
         <div class="group-actions">
           <ng-container *ngIf="group.members.includes(userEmail); else notMember">
-            <button (click)="leaveGroup(group.id)">Leave Group</button>
             <button (click)="navigateToGroupChat(group.id)">Chat</button>
+            <button (click)="navigateToFileUpload(group.id)">File Upload</button>
             <button (click)="navigateToGroupSchedules(group.id)">Schedules</button>
+            <button (click)="leaveGroup(group.id)">Leave Group</button>
           </ng-container>
           <ng-template #notMember>
             <button (click)="joinGroup(group.id)">Join Group</button>

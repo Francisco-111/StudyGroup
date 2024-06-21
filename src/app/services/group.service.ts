@@ -51,13 +51,4 @@ export class GroupService {
       members: firebase.firestore.FieldValue.arrayRemove(userEmail)
     });
   }
-
-  isMember(groupId: string, userEmail: string): Observable<boolean> {
-    return this.firestore.collection("groups").doc(groupId).valueChanges().pipe(
-      map((doc: any) => {
-        const data = doc;
-        return data?.members.includes(userEmail) || false;
-      })
-    );
-  }
 }

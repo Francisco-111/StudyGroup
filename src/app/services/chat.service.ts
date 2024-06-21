@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { finalize, map, switchMap } from 'rxjs/operators';
+import { finalize, switchMap } from 'rxjs/operators';
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import { UserService } from './user.service';
@@ -16,22 +16,21 @@ export class ChatService {
   ) {}
 
   sendMessage(groupId: string, message: any) {
-    return this.firestore.collection('groups/'+ groupId +'/messages').add(message);
+    return this.firestore.collection('groups/' + groupId + '/messages').add(message);
   }
 
   getMessages(groupId: string): Observable<any[]> {
     return this.firestore.collection('groups/' + groupId + '/messages', ref => ref.orderBy('timestamp')).valueChanges();
   }
 
-  uploadFile(groupId: string, file: File, userEmail: string): Observable<any> {
+  uploadFile(groupId: string, file: File): Observable<string> {
     const filePath = 'groups/' + groupId + '/files/' + file.name;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
     return task.snapshotChanges().pipe(
-      finalize(() => fileRef.getDownloadURL().pipe(
-        switchMap((url: string) => this.addFileRecord(groupId, { name: file.name, url, uploadedBy: userEmail, timestamp: new Date() }))
-      ))
+      finalize(() => fileRef.getDownloadURL()),
+      switchMap(() => fileRef.getDownloadURL())
     );
   }
 

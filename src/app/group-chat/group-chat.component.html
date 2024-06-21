@@ -1,33 +1,22 @@
-<!-- chat.component.html -->
-<div *ngIf="isMember" class="chat-container">
-  <div class="chat-section">
-    <h2>Group Chat</h2>
-    <div class="messages">
-      <div *ngFor="let message of messages">
-        <strong>{{ message.sender }}:</strong> {{ message.text }}
-      </div>
+<div *ngIf="userEmail">
+  <h2 class="chat-header">Group Chat</h2>
+  <div class="chat-window">
+    <div *ngFor="let message of messages" class="message">
+      <strong>{{ message.sender }}:</strong> {{ message.text }}
     </div>
-    <form (ngSubmit)="onSendMessage()">
-      <input type="text" [(ngModel)]="messageText" name="messageText" placeholder="Enter your message" required>
-      <button type="submit" class="send-btn">Send</button>
-    </form>
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
   </div>
-  <div class="file-section">
-    <h2>Upload File</h2>
-    <div class="file-upload">
-      <input type="file" (change)="onFileSelected($event)">
-      <button (click)="onUploadFile()" class="upload-btn">Upload</button>
-    </div>
-    <h2>Files</h2>
-    <div class="files">
-      <div *ngFor="let file of files">
-        <strong>{{ file.uploadedBy }}:</strong>
-        <a [href]="file.url" target="_blank">{{ file.name }}</a>
-      </div>
-    </div>
+  <div class="send-message">
+    <input
+      [(ngModel)]="messageText"
+      placeholder="Type your message"
+      class="message-input"
+      (keydown.enter)="onSendMessage()">
+    <button (click)="onSendMessage()" class="send-button">Send</button>
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
   </div>
 </div>
-<div *ngIf="!isMember && errorMessage" class="error-message">
-  {{ errorMessage }}
+<div *ngIf="!userEmail" class="error-message">
+  You must be logged in to send messages.
 </div>

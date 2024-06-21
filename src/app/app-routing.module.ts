@@ -18,9 +18,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'groups', component: GroupComponent, canActivate: [AuthGuard] },
-  { path: 'groups/:id/schedules', component: ScheduleComponent, canActivate: [AuthGuard] },
-  { path: 'file-upload', component: FileUploadComponent, canActivate: [AuthGuard] },
   { path: 'groups/:id/chat', component: GroupChatComponent, canActivate: [AuthGuard] },
+  { path: 'groups/:id/file-upload', component: FileUploadComponent , canActivate: [AuthGuard] },
+  { path: 'groups/:id/schedules', component: ScheduleComponent, canActivate: [AuthGuard] },
   { path: 'chat/:id', component: DirectChatComponent, canActivate: [AuthGuard] },
   { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard] }
 ];

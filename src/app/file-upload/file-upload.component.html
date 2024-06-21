@@ -1,13 +1,33 @@
-<div class="file-upload-container">
-  <h2>Upload File</h2>
-  <form (ngSubmit)="onUploadFile()">
-    <div>
-      <input type="file" (change)="onFileSelected($event)" required>
+<div *ngIf="userEmail" class="file-upload-container">
+  <div class="file-section">
+    <h2>Upload File</h2>
+    <div class="file-upload">
+      <input type="file" (change)="onFileSelected($event)">
+      <button (click)="onUploadFile()" [disabled]="isUploading" class="upload-btn">
+        Upload
+      </button>
     </div>
-    <button type="submit">Upload</button>
-  </form>
-  <div *ngIf="downloadURL" class="download-link">
-    File uploaded successfully. <a [href]="downloadURL" target="_blank">Download File</a>
   </div>
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <div class="files-section">
+    <h2 class="files-header">Files</h2>
+    <div class="file-headers">
+      <div class="file-header">Uploader</div>
+      <div class="file-header">Date Uploaded</div>
+      <div class="file-header">Time Uploaded</div>
+      <div class="file-header">File Name</div>
+    </div>
+    <div class="files">
+      <div *ngFor="let file of files" class="file-item">
+        <div class="file-details">
+          <div class="file-detail">{{ file.uploadedBy }}</div>
+          <div class="file-detail">{{ file.timestamp.toDate() | date:'shortDate' }}</div>
+          <div class="file-detail">{{ file.timestamp.toDate() | date:'shortTime' }}</div>
+          <div class="file-detail"><a [href]="file.url" target="_blank">{{ file.name }}</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
 </div>

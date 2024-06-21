@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupService } from '../services/group.service';
 import { AuthService } from '../services/auth.service';
-import {ActivatedRoute, Router} from "@angular/router";
-import {ScheduleService} from "../services/schedule.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-group',
@@ -17,10 +16,8 @@ export class GroupComponent implements OnInit {
 
   constructor(
     private groupService: GroupService,
-    private scheduleService: ScheduleService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
   ) {
     this.authService.user$.subscribe(user => {
       this.userEmail = user?.email || '';
@@ -68,5 +65,8 @@ export class GroupComponent implements OnInit {
 
   navigateToGroupSchedules(groupId: string) {
     this.router.navigate(['/groups', groupId, 'schedules']);
+  }
+  navigateToFileUpload(groupId: string) {
+    this.router.navigate(['/groups', groupId, 'file-upload']);
   }
 }

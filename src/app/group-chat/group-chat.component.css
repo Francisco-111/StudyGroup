@@ -1,97 +1,52 @@
-/* chat.component.css */
-.chat-container {
-  display: flex; /* Center content horizontally */
-  gap: 20px;
-  padding: 20px;
+.chat-header {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
 }
 
-.chat-section {
-  flex: 2;
-  max-width: 800px;
-}
-
-.file-section {
-  flex: 1;
-  max-width: 400px;
-  margin-left: 100px; /* Adjust the margin to center */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center content inside the file section */
-}
-
-.messages {
-  background: #f9f9f9;
-  border: 1px solid #ccc;
+.chat-window {
+  border: 1px solid #ddd;
   padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  height: auto;
-  overflow-y: auto;
+  height: 400px;
+  overflow-y: scroll;
+  margin-top: 20px;
 }
 
-.messages div {
+.message {
   margin-bottom: 10px;
 }
 
-form {
+.send-message {
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-form input[type="text"] {
+.message-input {
   flex: 1;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
   border-radius: 4px;
+  margin-right: 10px;
 }
 
-.send-btn,
-.upload-btn {
-  display: inline-block;
+.send-button {
   padding: 10px 20px;
-  font-size: 14px;
-  color: #fff;
-  background-color: #007bff;
+  font-size: 16px;
   border: none;
+  background-color: #007bff;
+  color: white;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.send-btn:hover,
-.upload-btn:hover {
+.send-button:hover {
   background-color: #0056b3;
-}
-
-.file-upload {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 25px; /* Add space between the file input and the upload button */
-}
-
-.file-upload input[type="file"] {
-  margin-bottom: 20px; /* Add space between the file input and the upload button */
-}
-
-.files {
-  background: #f9f9f9;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 4px;
-  max-height: 300px;
-  overflow-y: auto;
-  width: 100%; /* Ensure the files section takes full width of the container */
-}
-
-.files div {
-  margin-bottom: 10px;
 }
 
 .error-message {
   color: red;
-  margin-top: 10px;
-  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
 }
