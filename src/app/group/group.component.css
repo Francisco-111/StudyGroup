@@ -1,91 +1,79 @@
-/* group.component.css */
+/* styles.css */
 .group-container {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
 }
 
-.group-list {
-  flex: 1;
-  max-width: 400px; /* Adjust width as needed */
+.group-form, .group-list {
+  width: 90%; /* Adjust the width as needed */
+  max-width: 1200px; /* Add max-width for better responsiveness */
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
 }
 
-.group-list ul {
-  list-style-type: none;
-  padding: 0;
+.header-center {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.group-list li {
-  background: #f9f9f9;
-  border: 1px solid #ccc;
-  padding: 10px;
+.group-form label {
+  display: block;
   margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.group-form input {
+  width: 98%;
+  padding: 10px;
+  margin-bottom: 20px; /* Add space between input and create button */
+  border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 .group-actions {
+  margin-top: 10px;
   display: flex;
   gap: 10px;
-  margin-top: 10px;
 }
 
 .group-actions button {
-  padding: 5px 10px;
-  font-size: 14px;
-  color: #fff;
-  background-color: #007bff;
+  padding: 8px 12px;
   border: none;
   border-radius: 4px;
+  background-color: #007bff;
+  color: white;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .group-actions button:hover {
   background-color: #0056b3;
 }
 
-.group-form {
-  flex: 2;
-  max-width: 600px;
-  margin-left: 350px; /* Shift the form to the right */
-}
-
-.group-form form {
-  display: flex;
-  flex-direction: column;
-}
-
-.group-form label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.group-form input {
-  width: 96.75%;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 15px;
-}
-
-.create-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.create-btn:hover {
-  background-color: #0056b3;
-}
-
 .error-message {
   color: red;
   margin-top: 10px;
-  font-size: 14px;
+}
+
+.create-btn {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create-btn:hover {
+  background-color: #218838;
 }
