@@ -2,10 +2,22 @@
   <div class="file-section">
     <h2>Upload File</h2>
     <div class="file-upload">
-      <input type="file" (change)="onFileSelected($event)">
-      <button (click)="onUploadFile()" [disabled]="isUploading" class="upload-btn">
-        Upload
-      </button>
+      <input #fileInput type="file" (change)="onFileSelected($event)">
+      <button (click)="onUploadFile()" [disabled]="!selectedFile || showFileOptions" class="upload-btn">Upload</button>
+    </div>
+    <div *ngIf="showFileOptions" class="file-options">
+      <p>A file with the same name already exists. Choose an action:</p>
+      <div *ngFor="let file of filesWithSameName">
+        <label>
+          <input type="checkbox" (change)="toggleFileSelection(file.id)">
+          {{ file.name }} ({{ file.timestamp.toDate() | date:'hh:mm:ss a' }})
+        </label>
+      </div>
+      <div class="options-buttons">
+        <button (click)="onUploadFile(true)" [disabled]="!canOverwrite()" class="option-btn">Overwrite/Delete selected</button>
+        <button (click)="onUploadFile(false)" [disabled]="isUploading" class="option-btn">Upload as new file</button>
+        <button (click)="cancelUpload()" class="option-btn">Cancel</button>
+      </div>
     </div>
   </div>
   <div class="files-section">
@@ -21,7 +33,7 @@
         <div class="file-details">
           <div class="file-detail">{{ file.uploadedBy }}</div>
           <div class="file-detail">{{ file.timestamp.toDate() | date:'shortDate' }}</div>
-          <div class="file-detail">{{ file.timestamp.toDate() | date:'shortTime' }}</div>
+          <div class="file-detail">{{ file.timestamp.toDate() | date:'hh:mm:ss a' }}</div>
           <div class="file-detail"><a [href]="file.url" target="_blank">{{ file.name }}</a></div>
         </div>
       </div>
