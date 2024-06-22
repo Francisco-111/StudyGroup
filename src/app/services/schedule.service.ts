@@ -21,4 +21,7 @@ export class ScheduleService {
   createSchedule(groupId: string, schedule: any) {
     return this.firestore.collection('groups/' + groupId + '/schedules').add(schedule);
   }
+  deleteSchedule(groupId: string, scheduleId: string) {
+    return this.firestore.doc('groups/' + groupId + '/schedules/' + scheduleId).delete();
+  }
 }

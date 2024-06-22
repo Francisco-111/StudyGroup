@@ -1,46 +1,10 @@
-<!-- schedule.component.html -->
+<div class="header-container">
+  <button mat-button class="back-button" (click)="goBack()">Back to Groups</button>
+  <h1 class="header-title">Schedules</h1>
+</div>
+
 <div class="schedule-container">
-  <div class="schedule-list">
-    <h2>Schedules</h2>
-    <ul>
-      <li *ngFor="let schedule of schedules">
-        <strong>{{ schedule.eventName }}</strong> on {{ schedule.eventDate }}
-        <span *ngIf="schedule.eventTime">at {{ schedule.eventTime }}</span>
-        <span *ngIf="schedule.startTime">from {{ schedule.startTime }}</span>
-        <span *ngIf="schedule.endTime">to {{ schedule.endTime }}</span>
-        <p *ngIf="schedule.eventDescription">{{ schedule.eventDescription }}</p>
-      </li>
-    </ul>
-  </div>
-  <div class="schedule-form">
-    <h2>Create Schedule</h2>
-    <div class="form-group">
-      <label for="eventName">Event Name:</label>
-      <input id="eventName" [(ngModel)]="eventName" placeholder="Event Name" />
-    </div>
-    <div class="form-group">
-      <label for="eventDate">Event Date:</label>
-      <input id="eventDate" type="date" [(ngModel)]="eventDate" />
-    </div>
-    <div class="form-group">
-      <label for="eventTime">Event Time (optional):</label>
-      <input id="eventTime" type="time" [(ngModel)]="eventTime" />
-    </div>
-    <div class="form-group">
-      <label for="startTime">Start Time (optional):</label>
-      <input id="startTime" type="time" [(ngModel)]="startTime" />
-    </div>
-    <div class="form-group">
-      <label for="endTime">End Time (optional):</label>
-      <input id="endTime" type="time" [(ngModel)]="endTime" />
-    </div>
-    <div class="form-group description-group">
-      <label for="eventDescription">Description (optional):</label>
-      <textarea id="eventDescription" [(ngModel)]="eventDescription" placeholder="Event Description"></textarea>
-    </div>
-    <div>
-      <button class="create-btn" (click)="onCreateSchedule()">Create Schedule</button>
-    </div>
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <div class="calendar-container">
+    <full-calendar [options]="calendarOptions"></full-calendar>
   </div>
 </div>

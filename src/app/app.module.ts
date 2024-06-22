@@ -24,6 +24,15 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {HomeComponent} from "./home/home.component";
 import {ProfileComponent} from "./profile/profile.component";
+import { FullCalendarModule } from '@fullcalendar/angular';
+import {EventDialogComponent} from "./event-dialog/event-dialog.component";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MatDialogContent, MatDialogModule, MatDialogTitle} from "@angular/material/dialog";
+import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatButtonModule} from "@angular/material/button";
+import {EventDetailDialogComponent} from "./event-detail-dialog/event-detail-dialog.component";
 
 @NgModule({
   declarations: [
@@ -38,6 +47,9 @@ import {ProfileComponent} from "./profile/profile.component";
     UserListComponent,
     HomeComponent,
     ProfileComponent,
+    EventDialogComponent,
+    EventDetailDialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -47,6 +59,16 @@ import {ProfileComponent} from "./profile/profile.component";
     AngularFireStorageModule,
     AngularFirestoreModule,
     FormsModule,
+    FullCalendarModule,
+    MatDialogContent,
+    MatFormField,
+    BrowserAnimationsModule,
+    MatDialogTitle,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule
 
   ],
   providers: [
@@ -55,7 +77,8 @@ import {ProfileComponent} from "./profile/profile.component";
     ScheduleService,
     ChatService,
     UserService,
-    AuthGuard
+    AuthGuard,
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

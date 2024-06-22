@@ -1,76 +1,50 @@
-/* schedule.component.css */
-.schedule-container {
+.header-container {
   display: flex;
-  gap: 20px;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
 }
 
-.schedule-list {
-  flex: 1;
-  max-width: 400px; /* Adjust width as needed */
+.back-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
-.schedule-list ul {
-  list-style-type: none;
+.header-title {
+  text-align: center;
+  margin: 0;
   padding: 0;
 }
 
-.schedule-list li {
-  background: #f9f9f9;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 4px;
+.schedule-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto; /* Ensure vertical scrolling */
+  height: 80vh; /* Adjust the height to allow scrolling */
 }
 
-.schedule-form {
-  flex: 2;
-  max-width: 600px;
-  margin-left: 300px; /* Shift the form to the right */
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.form-group input,
-.form-group textarea {
+.calendar-container {
   width: 100%;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  max-width: 1200px; /* Adjust the max-width as needed to make the calendar wider */
 }
 
-.form-group.description-group textarea {
-  width: calc(100% + 16px); /* Make the description box wider */
-  height: 100px; /* Make the description box taller */
-  margin-left: -8px; /* Adjust for padding */
+.fc-header-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.create-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.fc-toolbar-chunk {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
-.create-btn:hover {
-  background-color: #0056b3;
-}
-
-.error-message {
-  color: red;
-  margin-top: 10px;
-  font-size: 14px;
+.fc-toolbar-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
 }
