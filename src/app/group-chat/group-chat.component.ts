@@ -14,6 +14,7 @@ export class GroupChatComponent implements OnInit {
   groupId: string = '';
   userEmail: string | null = '';
   errorMessage: string = '';
+  selectedMessages: Set<string> = new Set();
 
   constructor(
     private chatService: ChatService,
@@ -55,5 +56,26 @@ export class GroupChatComponent implements OnInit {
         }
       );
     }
+  }
+  toggleMessageSelection(messageId: string) {
+    if (this.selectedMessages.has(messageId)) {
+      this.selectedMessages.delete(messageId);
+    } else {
+      this.selectedMessages.add(messageId);
+    }
+  }
+
+  deleteSelectedMessages() {
+    this.selectedMessages.forEach(messageId => {
+      this.chatService.deleteMessage(this.groupId, messageId).then(
+        () => {
+          this.loadMessages();
+        },
+        (error) => {
+          this.errorMessage = error.message;
+        }
+      );
+    });
+    this.selectedMessages.clear();
   }
 }

@@ -71,4 +71,7 @@ export class ChatService {
   private getChatId(senderId: string, receiverId: string): string {
     return senderId < receiverId ? senderId + '_' + receiverId : receiverId + '_' + senderId;
   }
+  deleteMessage(groupId: string, messageId: string) {
+    return this.firestore.collection(`groups/${groupId}/messages`).doc(messageId).delete();
+  }
 }
