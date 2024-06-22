@@ -30,24 +30,23 @@ export class GroupService {
   }
 
   getUserGroups(userEmail: string): Observable<any[]> {
-    return this.firestore.collection("groups", ref => ref.where('members', 'array-contains', userEmail)).snapshotChanges().pipe(
+    return this.firestore.collection('groups', ref => ref.where('members', 'array-contains', userEmail)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.doc.data();
+        const data = a.payload.doc.data() as any;
         const id = a.payload.doc.id;
-        // @ts-ignore
         return { id, ...data };
       }))
     );
   }
 
   joinGroup(groupId: string, userEmail: string) {
-    return this.firestore.collection("groups").doc(groupId).update({
+    return this.firestore.collection('groups').doc(groupId).update({
       members: firebase.firestore.FieldValue.arrayUnion(userEmail)
     });
   }
 
   leaveGroup(groupId: string, userEmail: string) {
-    return this.firestore.collection("groups").doc(groupId).update({
+    return this.firestore.collection('groups').doc(groupId).update({
       members: firebase.firestore.FieldValue.arrayRemove(userEmail)
     });
   }

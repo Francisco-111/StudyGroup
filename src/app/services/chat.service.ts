@@ -20,19 +20,14 @@ export class ChatService {
   }
 
   getMessages(groupId: string): Observable<any[]> {
-    return this.firestore.collection('groups/' + groupId + '/messages', ref => ref.orderBy('timestamp')).valueChanges();
-  }
-
-  uploadFile(groupId: string, file: File) {
-    const filePath = 'groups/' + groupId + '/files/' + file.name;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file);
-
-    return fileRef;
-  }
-
-  updateFileRecord(groupId: string, fileId: string, fileRecord: any) {
-    return this.firestore.doc(`groups/${groupId}/files/${fileId}`).update(fileRecord);
+    return this.firestore.collection('groups/' + groupId + '/messages', ref => ref.orderBy('timestamp')).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        // @ts-ignore
+        return { id, ...data };
+      }))
+    );
   }
 
   deleteFileRecord(groupId: string, fileId: string) {

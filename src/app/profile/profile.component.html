@@ -1,38 +1,45 @@
-<div *ngIf="user$ | async as user">
-  <h2>{{ user.displayName }}'s Profile</h2>
+<div *ngIf="userEmail">
+  <h2 class="center">{{ userEmail }}'s Profile</h2>
 
   <div>
-    <h3>Your Direct Chats</h3>
-    <ul>
-      <li *ngFor="let chat of directChats$ | async">
-        {{ chat.title }} <!-- Adjust based on your chat data structure -->
-      </li>
-    </ul>
-  </div>
-
-  <div>
-    <h3>Your Groups</h3>
-    <ul>
-      <li *ngFor="let group of groups$ | async">
-        {{ group.groupName }}
-        <ul>
-          <li *ngFor="let chat of group.chats">
-            {{ chat.content }} <!-- Adjust based on your chat data structure -->
-          </li>
-        </ul>
-        <ul>
-          <li *ngFor="let file of group.files">
-            {{ file.name }}
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-  <div>
-    <h3>Your Files</h3>
-    <ul>
-      <li *ngFor="let file of files$ | async">{{ file.name }}</li>
-    </ul>
+    <h3 class="center">Your Groups</h3>
+    <ng-container *ngIf="groups$ | async as groups">
+      <div *ngFor="let group of groups" class="group-box">
+        <h4 class="center">{{ group.groupName }}</h4>
+        <div class="group-section">
+          <div class="group-container">
+            <div class="group-chats">
+              <h5>Chats</h5>
+              <ul>
+                <li *ngFor="let chat of group.chats">
+                  {{ chat.text }} ({{ chat.timestamp }})
+                </li>
+              </ul>
+            </div>
+            <div class="group-files">
+              <h5>Files</h5>
+              <ul>
+                <li *ngFor="let file of group.files">
+                  {{ file.name }} ({{ file.timestamp }})
+                </li>
+              </ul>
+            </div>
+            <div class="group-schedules">
+              <h5>Schedules</h5>
+              <ul>
+                <li *ngFor="let schedule of group.schedules">
+                  <div *ngIf="schedule.eventName">Name: {{ schedule.eventName }}</div>
+                  <div *ngIf="schedule.eventDate">Date: {{ schedule.eventDate }}</div>
+                  <div *ngIf="schedule.eventTime">Event Time: {{ schedule.eventTime }}</div>
+                  <div *ngIf="schedule.startTime">Start Time: {{ schedule.startTime }}</div>
+                  <div *ngIf="schedule.endTime">End Time: {{ schedule.endTime }}</div>
+                  <div *ngIf="schedule.eventDescription">Description: {{ schedule.eventDescription }}</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>
