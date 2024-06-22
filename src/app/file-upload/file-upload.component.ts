@@ -21,6 +21,8 @@ export class FileUploadComponent implements OnInit {
   showFileOptions: boolean = false;
   filesWithSameName: any[] = [];
   selectedFilesToDelete: Set<string> = new Set();
+  userFilesToDelete: Set<string> = new Set(); // Added this line
+  enableDeleteMode: boolean = false; // Added this line
 
   constructor(
     private chatService: ChatService,
@@ -69,8 +71,21 @@ export class FileUploadComponent implements OnInit {
       this.selectedFilesToDelete.add(fileId);
     }
   }
+
+  toggleUserFileSelection(fileId: string) {
+    if (this.userFilesToDelete.has(fileId)) {
+      this.userFilesToDelete.delete(fileId);
+    } else {
+      this.userFilesToDelete.add(fileId);
+    }
+  }
+
   canOverwrite(): boolean {
     return this.selectedFilesToDelete.size > 0;
+  }
+
+  canDeleteUserFiles(): boolean {
+    return this.userFilesToDelete.size > 0;
   }
 
   onUploadFile(overwrite: boolean = false) {
@@ -90,11 +105,27 @@ export class FileUploadComponent implements OnInit {
     }
   }
 
+  onDeleteUserFiles() {
+    if (this.userFilesToDelete.size > 0) {
+      this.deleteSelectedUserFiles().then(() => {
+        this.userFilesToDelete.clear();
+        this.loadFiles();
+      }).catch(error => {
+        this.errorMessage = error.message;
+      });
+    }
+  }
+
   cancelUpload() {
     this.selectedFile = null;
     this.showFileOptions = false;
     this.selectedFilesToDelete.clear();
     this.resetFileInput();
+  }
+
+  cancelUserFileDeletion() {
+    this.userFilesToDelete.clear();
+    this.enableDeleteMode = false; // Added this line
   }
 
   resetFileInput() {
@@ -104,16 +135,26 @@ export class FileUploadComponent implements OnInit {
   }
 
   deleteSelectedFiles() {
-    // @ts-ignore
-    const deletePromises = [];
+    const deletePromises: any[] = [];
     this.selectedFilesToDelete.forEach(fileId => {
       deletePromises.push(this.chatService.deleteFileRecord(this.groupId, fileId));
     });
-    // @ts-ignore
     return Promise.all(deletePromises).then(() => {
       console.log('All selected files have been deleted from Firestore.');
     }).catch(error => {
       console.error('Error deleting selected files from Firestore:', error);
+    });
+  }
+
+  deleteSelectedUserFiles() {
+    const deletePromises: any[] = [];
+    this.userFilesToDelete.forEach(fileId => {
+      deletePromises.push(this.chatService.deleteFileRecord(this.groupId, fileId));
+    });
+    return Promise.all(deletePromises).then(() => {
+      console.log('All selected user files have been deleted from Firestore.');
+    }).catch(error => {
+      console.error('Error deleting selected user files from Firestore:', error);
     });
   }
 

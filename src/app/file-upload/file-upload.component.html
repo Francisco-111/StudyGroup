@@ -1,8 +1,11 @@
 <div *ngIf="userEmail" class="file-upload-container">
   <div class="file-section">
-    <h2>Upload File</h2>
+    <div class="file-header-container">
+      <h2 class="upload-header">Upload File</h2>
+      <button (click)="enableDeleteMode = !enableDeleteMode" class="delete-btn">Click to select file to delete</button>
+    </div>
     <div class="file-upload">
-      <input #fileInput type="file" (change)="onFileSelected($event)">
+      <input #fileInput type="file" (change)="onFileSelected($event)" class="file-input">
       <button (click)="onUploadFile()" [disabled]="!selectedFile || showFileOptions" class="upload-btn">Upload</button>
     </div>
     <div *ngIf="showFileOptions" class="file-options">
@@ -23,6 +26,7 @@
   <div class="files-section">
     <h2 class="files-header">Files</h2>
     <div class="file-headers">
+      <div class="file-header checkbox-header"></div>
       <div class="file-header">Uploader</div>
       <div class="file-header">Date Uploaded</div>
       <div class="file-header">Time Uploaded</div>
@@ -31,12 +35,19 @@
     <div class="files">
       <div *ngFor="let file of files" class="file-item">
         <div class="file-details">
+          <div class="file-detail checkbox-detail">
+            <input *ngIf="enableDeleteMode && file.uploadedBy === userEmail" type="checkbox" (change)="toggleUserFileSelection(file.id)">
+          </div>
           <div class="file-detail">{{ file.uploadedBy }}</div>
           <div class="file-detail">{{ file.timestamp.toDate() | date:'shortDate' }}</div>
           <div class="file-detail">{{ file.timestamp.toDate() | date:'hh:mm:ss a' }}</div>
           <div class="file-detail"><a [href]="file.url" target="_blank">{{ file.name }}</a></div>
         </div>
       </div>
+    </div>
+    <div *ngIf="canDeleteUserFiles()" class="delete-options">
+      <button (click)="onDeleteUserFiles()" class="delete-btn">Confirm delete</button>
+      <button (click)="cancelUserFileDeletion()" class="delete-btn">Cancel</button>
     </div>
   </div>
 </div>
