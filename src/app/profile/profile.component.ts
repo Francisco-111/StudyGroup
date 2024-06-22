@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Observable, of, combineLatest } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -24,7 +24,8 @@ export class ProfileComponent implements OnInit {
     private groupService: GroupService,
     private fileService: FileService,
     private scheduleService: ScheduleService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -60,10 +61,10 @@ export class ProfileComponent implements OnInit {
                       console.log(`Schedules for group ${group.id}:`, schedules);
                       return schedules.map(schedule => ({
                         ...schedule,
-                        eventDate: schedule.eventDate ? this.datePipe.transform(schedule.eventDate, 'MM/dd/yyyy') : null,
-                        eventTime: schedule.eventTime ? this.datePipe.transform(schedule.eventTime, 'hh:mm:ss a') : null,
-                        startTime: schedule.startTime ? this.datePipe.transform(schedule.startTime, 'hh:mm:ss a') : null,
-                        endTime: schedule.endTime ? this.datePipe.transform(schedule.endTime, 'hh:mm:ss a') : null
+                        eventDate: schedule.eventDate ? this.datePipe.transform(schedule.eventDate, 'MM/dd/yyyy') : 'N/A',
+                        eventTime: schedule.eventTime ? this.datePipe.transform(schedule.eventTime, 'hh:mm:ss a') : 'N/A',
+                        startTime: schedule.startTime ? this.datePipe.transform(schedule.startTime, 'hh:mm:ss a') : 'N/A',
+                        endTime: schedule.endTime ? this.datePipe.transform(schedule.endTime, 'hh:mm:ss a') : 'N/A'
                       }));
                     }),
                     catchError(err => of([]))
@@ -74,10 +75,17 @@ export class ProfileComponent implements OnInit {
               );
 
               return combineLatest(groupObservables).pipe(
-                map(results => results)
+                map(results => {
+                  console.log('Final combined results:', results);
+                  this.cd.detectChanges();
+                  return results;
+                })
               );
             }),
-            catchError(err => of([]))
+            catchError(err => {
+              console.error('Error fetching groups:', err);
+              return of([]);
+            })
           );
         }
       }

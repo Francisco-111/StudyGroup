@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from '../services/chat.service';
 import { AuthService } from '../services/auth.service';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-group-chat',
@@ -19,7 +20,8 @@ export class GroupChatComponent implements OnInit {
   constructor(
     private chatService: ChatService,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.groupId = this.route.snapshot.paramMap.get('id') || '';
     this.authService.afAuth.authState.subscribe(user => {
@@ -35,7 +37,14 @@ export class GroupChatComponent implements OnInit {
 
   loadMessages() {
     this.chatService.getMessages(this.groupId).subscribe((data: any) => {
-      this.messages = data;
+      console.log('Loaded messages:', data);
+      this.messages = data.map((msg: any) => ({
+        ...msg,
+        formattedTimestamp: this.formatTimestamp(msg.timestamp)
+      }));
+      console.log('Formatted messages:', this.messages);
+    }, error => {
+      console.error('Error loading messages:', error);
     });
   }
 
@@ -44,8 +53,9 @@ export class GroupChatComponent implements OnInit {
       const message = {
         text: this.messageText,
         sender: this.userEmail,
-        timestamp: new Date()
+        timestamp: new Date().toISOString()
       };
+      console.log('Sending message:', message);
       this.chatService.sendMessage(this.groupId, message).then(
         () => {
           this.messageText = '';
@@ -57,6 +67,7 @@ export class GroupChatComponent implements OnInit {
       );
     }
   }
+
   toggleMessageSelection(messageId: string) {
     if (this.selectedMessages.has(messageId)) {
       this.selectedMessages.delete(messageId);
@@ -77,5 +88,26 @@ export class GroupChatComponent implements OnInit {
       );
     });
     this.selectedMessages.clear();
+  }
+
+  goBack() {
+    this.router.navigate(['/groups']); // Navigate back to groups
+  }
+
+  formatTimestamp(timestamp: any): string {
+    try {
+      if (timestamp.seconds !== undefined && timestamp.nanoseconds !== undefined) {
+        // Firestore timestamp
+        const date = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000);
+        return format(date, 'MM/dd/yyyy hh:mm:ss a');
+      } else {
+        // ISO string
+        const date = new Date(timestamp);
+        return format(date, 'MM/dd/yyyy hh:mm:ss a');
+      }
+    } catch (error) {
+      console.error('Error formatting timestamp:', error);
+      return 'Invalid Date';
+    }
   }
 }

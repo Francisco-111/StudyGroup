@@ -2,6 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+}
+
+.top-right-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .file-section {
@@ -12,27 +22,40 @@
 
 .file-header-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .upload-header {
   flex-grow: 1;
   text-align: center;
-  margin-left: 180px;
 }
 
 .file-upload {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   margin-top: 10px;
   justify-content: center;
 }
 
 .file-input {
-  margin-right: 10px;
+  margin-right: 20px;
+}
+
+.back-btn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.back-btn:hover {
+  background-color: #1976d2;
 }
 
 .delete-btn {
@@ -63,11 +86,20 @@
 
 .file-options {
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-same-name {
+  text-align: center;
 }
 
 .options-buttons {
   display: flex;
-  gap: 10px;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .options-buttons .option-btn {
@@ -89,20 +121,19 @@
 
 .files-header {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-.file-headers,
-.file-details {
+.file-headers, .file-details {
   display: grid;
   grid-template-columns: 40px 1fr 1fr 1fr 2fr;
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
 }
 
-.file-headers .file-header,
-.file-details .file-detail {
+.file-headers .file-header, .file-details .file-detail {
   text-align: center;
 }
 
@@ -112,6 +143,13 @@
   align-items: center;
 }
 
+.files-scrollable {
+  max-height: 300px; /* Adjust this value as needed */
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
 .hidden {
   display: none;
 }
@@ -119,11 +157,11 @@
 .delete-options {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .error-message {
   color: red;
-  margin-top: 10px;
+  margin-top: 20px;
 }

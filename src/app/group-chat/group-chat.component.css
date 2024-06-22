@@ -1,3 +1,24 @@
+.chat-container {
+  position: relative;
+  padding-top: 40px; /* Adjust the padding to ensure space for the back button */
+}
+
+.back-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: gray;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.back-button:hover {
+  background-color: darkgray;
+}
+
 .chat-header {
   display: flex;
   justify-content: center;
@@ -37,12 +58,36 @@
 .chat-window {
   border: 1px solid #ccc;
   padding: 10px;
-  height: 300px;
+  height: 500px;
   overflow-y: scroll;
 }
 
 .message {
-  padding: 5px 0;
+  margin-bottom: 20px; /* Add spacing between messages */
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.select-checkbox {
+  margin-right: 10px; /* Space between checkbox and sender */
+}
+
+.message-sender {
+  margin-right: 10px; /* Space between sender and timestamp */
+  font-weight: bold;
+}
+
+.timestamp {
+  color: #888;
+  font-size: 12px;
+}
+
+.message-text {
+  margin-left: 25px; /* Align text with the sender */
 }
 
 .send-message {

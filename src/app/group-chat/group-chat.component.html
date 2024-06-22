@@ -1,27 +1,35 @@
-<div *ngIf="userEmail">
-  <div class="chat-header">
-    <span *ngIf="messages.length > 0" class="select-message-info">Select message to delete</span>
-    <h2>Group Chat</h2>
-    <button *ngIf="selectedMessages.size > 0" (click)="deleteSelectedMessages()" class="delete-button">Delete Selected</button>
-  </div>
-  <div class="chat-window">
-    <div *ngFor="let message of messages" class="message">
-      <input type="checkbox" (change)="toggleMessageSelection(message.id)" />
-      <strong>{{ message.sender }}:</strong> {{ message.text }}
+<div class="chat-container">
+  <button (click)="goBack()" class="back-button">Back to Groups</button> <!-- Back button -->
+
+  <div *ngIf="userEmail">
+    <div class="chat-header">
+      <span *ngIf="messages.length > 0" class="select-message-info">Select message to delete</span>
+      <h2>Group Chat</h2>
+      <button *ngIf="selectedMessages.size > 0" (click)="deleteSelectedMessages()" class="delete-button">Delete Selected</button>
+    </div>
+    <div class="chat-window">
+      <div *ngFor="let message of messages" class="message">
+        <div class="message-header">
+          <input type="checkbox" (change)="toggleMessageSelection(message.id)" class="select-checkbox"/>
+          <strong class="message-sender">{{ message.sender }}</strong>
+          <span class="timestamp">{{ message.formattedTimestamp }}</span>
+        </div>
+        <p class="message-text">{{ message.text }}</p>
+      </div>
+    </div>
+    <div class="send-message">
+      <input
+        [(ngModel)]="messageText"
+        placeholder="Type your message"
+        class="message-input"
+        (keydown.enter)="onSendMessage()">
+      <button (click)="onSendMessage()" class="send-button">Send</button>
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
     </div>
   </div>
-  <div class="send-message">
-    <input
-      [(ngModel)]="messageText"
-      placeholder="Type your message"
-      class="message-input"
-      (keydown.enter)="onSendMessage()">
-    <button (click)="onSendMessage()" class="send-button">Send</button>
+  <div *ngIf="!userEmail" class="error-message">
+    You must be logged in to send messages.
   </div>
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
-</div>
-<div *ngIf="!userEmail" class="error-message">
-  You must be logged in to send messages.
 </div>

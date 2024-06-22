@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import { AuthService } from '../services/auth.service';
 import { finalize } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
@@ -28,6 +28,7 @@ export class FileUploadComponent implements OnInit {
     private chatService: ChatService,
     private authService: AuthService,
     private route: ActivatedRoute,
+    private router: Router,
     private storage: AngularFireStorage
   ) {
     this.groupId = this.route.snapshot.paramMap.get('id') || '';
@@ -183,5 +184,8 @@ export class FileUploadComponent implements OnInit {
         });
       })
     ).subscribe();
+  }
+  goBackToGroups() {
+    this.router.navigate(['/groups']); // Navigate to the groups route
   }
 }

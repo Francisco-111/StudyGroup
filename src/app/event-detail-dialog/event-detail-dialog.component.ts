@@ -14,6 +14,7 @@ export class EventDetailDialogComponent implements OnInit {
   startTime: string = 'N/A';
   endTime: string = 'N/A';
   eventDescription: string = 'N/A';
+  scheduledBy: string = 'N/A'; // New property
 
   constructor(
     public dialogRef: MatDialogRef<EventDetailDialogComponent>,
@@ -28,6 +29,7 @@ export class EventDetailDialogComponent implements OnInit {
     this.startTime = event.extendedProps.startTime || 'N/A';
     this.endTime = (event.end && event.end.split('T')[1]) ? event.end.split('T')[1].slice(0, 5) : 'N/A'; // Extract time part or set to 'N/A'
     this.eventDescription = event.extendedProps.description || 'N/A';
+    this.scheduledBy = event.extendedProps.scheduledBy || 'N/A'; // Assign the scheduler information
   }
 
   onNoClick(): void {

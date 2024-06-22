@@ -1,3 +1,4 @@
+<!-- event-detail-dialog.component.html -->
 <h1 mat-dialog-title>Event Details</h1>
 <div mat-dialog-content>
   <p><strong>Event Name:</strong> {{ eventName }}</p>
@@ -6,6 +7,7 @@
   <p><strong>Start Time:</strong> {{ startTime }}</p>
   <p><strong>End Time:</strong> {{ endTime }}</p>
   <p><strong>Description:</strong> {{ eventDescription }}</p>
+  <p><strong>Scheduled By:</strong> {{ scheduledBy }}</p> <!-- New line to show the scheduler -->
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Close</button>

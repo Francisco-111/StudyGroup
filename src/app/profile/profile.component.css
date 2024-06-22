@@ -1,3 +1,8 @@
+.scrollable-container {
+  height: 100vh; /* Full viewport height */
+  overflow: auto; /* Enables scrolling */
+}
+
 .center {
   text-align: center;
 }
