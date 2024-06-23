@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import { AuthService } from '../services/auth.service';
 import { finalize } from 'rxjs/operators';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
@@ -21,8 +21,8 @@ export class FileUploadComponent implements OnInit {
   showFileOptions: boolean = false;
   filesWithSameName: any[] = [];
   selectedFilesToDelete: Set<string> = new Set();
-  userFilesToDelete: Set<string> = new Set(); // Added this line
-  enableDeleteMode: boolean = false; // Added this line
+  userFilesToDelete: Set<string> = new Set();
+  enableDeleteMode: boolean = false;
 
   constructor(
     private chatService: ChatService,
@@ -63,6 +63,10 @@ export class FileUploadComponent implements OnInit {
         this.showFileOptions = false;
       }
     }
+  }
+
+  hasUserUploadedFiles(): boolean {
+    return this.files.some(file => file.uploadedBy === this.userEmail);
   }
 
   toggleFileSelection(fileId: string) {
@@ -111,6 +115,7 @@ export class FileUploadComponent implements OnInit {
       this.deleteSelectedUserFiles().then(() => {
         this.userFilesToDelete.clear();
         this.loadFiles();
+        this.enableDeleteMode = false; // Hide checkboxes and revert button text
       }).catch(error => {
         this.errorMessage = error.message;
       });
@@ -126,7 +131,7 @@ export class FileUploadComponent implements OnInit {
 
   cancelUserFileDeletion() {
     this.userFilesToDelete.clear();
-    this.enableDeleteMode = false; // Added this line
+    this.enableDeleteMode = false;
   }
 
   resetFileInput() {
@@ -185,7 +190,15 @@ export class FileUploadComponent implements OnInit {
       })
     ).subscribe();
   }
+
   goBackToGroups() {
     this.router.navigate(['/groups']); // Navigate to the groups route
+  }
+
+  toggleDeleteMode() {
+    this.enableDeleteMode = !this.enableDeleteMode;
+    if (!this.enableDeleteMode) {
+      this.userFilesToDelete.clear();
+    }
   }
 }

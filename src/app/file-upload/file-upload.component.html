@@ -1,7 +1,9 @@
 <div *ngIf="userEmail" class="file-upload-container">
   <div class="top-right-buttons">
     <button (click)="goBackToGroups()" class="back-btn">Back to Groups</button>
-    <button (click)="enableDeleteMode = !enableDeleteMode" class="delete-btn">Click to select file to delete</button>
+    <button *ngIf="hasUserUploadedFiles()" (click)="toggleDeleteMode()" class="delete-btn">
+      {{ enableDeleteMode ? 'Click to Cancel' : 'Click to select file to delete' }}
+    </button>
   </div>
   <div class="file-section">
     <div class="file-header-container">
