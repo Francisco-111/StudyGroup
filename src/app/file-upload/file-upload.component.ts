@@ -115,7 +115,7 @@ export class FileUploadComponent implements OnInit {
       this.deleteSelectedUserFiles().then(() => {
         this.userFilesToDelete.clear();
         this.loadFiles();
-        this.enableDeleteMode = false; // Hide checkboxes and revert button text
+        this.enableDeleteMode = false;
       }).catch(error => {
         this.errorMessage = error.message;
       });
@@ -179,12 +179,12 @@ export class FileUploadComponent implements OnInit {
           };
           this.chatService.addFileRecord(this.groupId, fileRecord).then(() => {
             this.selectedFile = null;
-            this.loadFiles(); // Refresh the file list
-            this.resetFileInput(); // Reset file input
-            this.isUploading = false; // Re-enable button after upload
+            this.loadFiles();
+            this.resetFileInput();
+            this.isUploading = false;
           }).catch(error => {
             this.errorMessage = error.message;
-            this.isUploading = false; // Re-enable button in case of error
+            this.isUploading = false;
           });
         });
       })
@@ -192,7 +192,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   goBackToGroups() {
-    this.router.navigate(['/groups']); // Navigate to the groups route
+    this.router.navigate(['/groups']);
   }
 
   toggleDeleteMode() {

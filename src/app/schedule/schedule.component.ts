@@ -1,4 +1,3 @@
-// schedule.component.ts
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -46,7 +45,7 @@ export class ScheduleComponent implements OnInit {
         extendedProps: {
           startTime: event.startTime,
           eventTime: event.eventTime,
-          scheduledBy: event.scheduledBy // Ensure this field is included
+          scheduledBy: event.scheduledBy
         }
       }));
     });
@@ -73,10 +72,10 @@ export class ScheduleComponent implements OnInit {
     if (result) {
       const user = await this.scheduleService.getCurrentUser();
       console.log('User display name:', user?.displayName);
-      const displayName = user ? (user.displayName || user.email) : 'Anonymous'; // Use user's email as fallback
+      const displayName = user ? (user.displayName || user.email) : 'Anonymous';
       const newEvent = {
         ...result,
-        scheduledBy: displayName // Use user's display name or email or 'Anonymous'
+        scheduledBy: displayName
       };
       const createdEvent = await this.scheduleService.createSchedule(this.groupId, newEvent);
       this.calendarOptions.events = [...(this.calendarOptions.events as any[]), {
@@ -88,7 +87,7 @@ export class ScheduleComponent implements OnInit {
         extendedProps: {
           startTime: createdEvent.startTime,
           eventTime: createdEvent.eventTime,
-          scheduledBy: createdEvent.scheduledBy // Include this field
+          scheduledBy: createdEvent.scheduledBy
         }
       }];
     }
@@ -115,6 +114,6 @@ export class ScheduleComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/groups']); // Navigate back to groups
+    this.router.navigate(['/groups']);
   }
 }

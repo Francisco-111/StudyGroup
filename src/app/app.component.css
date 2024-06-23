@@ -25,10 +25,10 @@ body, html {
 
 .sidenav {
   height: 100%;
-  width: 150px; /* Adjust width as needed for open state */
+  width: 150px;
   position: fixed;
   top: 0;
-  left: -270px; /* Initially hidden off-screen */
+  left: -270px;
   background-color: #111;
   overflow-x: hidden;
   transition: left 0.6s;
@@ -49,11 +49,11 @@ body, html {
 
 .sidenav ul.nav-items {
   flex-grow: 1;
-  margin-top: 60px; /* Space to align with the nav toggle */
+  margin-top: 60px;
 }
 
 .sidenav ul.logout-item {
-  margin-bottom: 20px; /* Adjust as needed for spacing */
+  margin-bottom: 20px;
 }
 
 .sidenav ul li {
@@ -65,8 +65,8 @@ body, html {
   text-decoration: none;
   color: white;
   display: block;
-  font-size: 18px; /* Increase font size */
-  line-height: 1.5; /* Set line height to 1.5 for spacing */
+  font-size: 18px;
+  line-height: 1.5;
   transition: 0.3s;
 }
 
@@ -74,22 +74,26 @@ body, html {
   background-color: #575757;
 }
 
+.sidenav ul.logout-item li a {
+  color: #ff0000;
+}
+
 .main {
   flex-grow: 1;
   padding: 16px;
   transition: margin-left 0.3s;
-  margin-left: 0; /* Initially no margin */
+  margin-left: 0;
   width: 100%;
 }
 
 .main.shifted {
-  margin-left: 170px; /* Same as the width of the sidenav when open */
+  margin-left: 170px;
 }
 
 @media screen and (max-width: 768px) {
   .sidenav {
-    width: 200px; /* Adjust width as needed for open state on small screens */
-    left: -200px; /* Initially hidden off-screen */
+    width: 200px;
+    left: -200px;
   }
 
   .sidenav.open {
@@ -97,14 +101,14 @@ body, html {
   }
 
   .nav-toggle {
-    left: 10px; /* Keep hamburger menu on screen */
+    left: 10px;
   }
 
   .main {
-    margin-left: 0; /* Initially no margin */
+    margin-left: 0;
   }
 
   .main.shifted {
-    margin-left: 200px; /* Adjust margin as needed for open state on small screens */
+    margin-left: 200px;
   }
 }

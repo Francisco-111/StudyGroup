@@ -63,7 +63,7 @@
 }
 
 .message {
-  margin-bottom: 20px; /* Add spacing between messages */
+  margin-bottom: 20px;
 }
 
 .message-header {
@@ -73,11 +73,11 @@
 }
 
 .select-checkbox {
-  margin-right: 10px; /* Space between checkbox and sender */
+  margin-right: 10px;
 }
 
 .message-sender {
-  margin-right: 10px; /* Space between sender and timestamp */
+  margin-right: 10px;
   font-weight: bold;
 }
 

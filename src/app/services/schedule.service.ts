@@ -1,4 +1,3 @@
-// schedule.service.ts
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -20,7 +19,7 @@ export class ScheduleService {
           const id = a.payload.doc.id;
           return { id, ...data };
         });
-        console.log(`Fetched schedules for group ${groupId}:`, schedules); // Logging fetched schedules
+        console.log(`Fetched schedules for group ${groupId}:`, schedules);
         return schedules;
       }),
       catchError(err => {
@@ -34,7 +33,7 @@ export class ScheduleService {
     const docRef = await this.firestore.collection('groups/' + groupId + '/schedules').add(schedule);
     const doc = await docRef.get();
     // @ts-ignore
-    return { id: docRef.id, ...doc.data() }; // Return the document data along with its ID
+    return { id: docRef.id, ...doc.data() };
   }
 
   deleteSchedule(groupId: string, scheduleId: string) {

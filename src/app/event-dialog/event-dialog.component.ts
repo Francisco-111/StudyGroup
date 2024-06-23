@@ -13,11 +13,11 @@ export class EventDialogComponent implements OnInit {
   startTime: string | null = null;
   endTime: string | null = null;
   eventDescription: string = '';
-  currentDate: string = new Date().toISOString().split('T')[0]; // Current date in YYYY-MM-DD format
-  currentTime: string = new Date().toTimeString().substring(0, 5); // Current time in HH:MM format
+  currentDate: string = new Date().toISOString().split('T')[0];
+  currentTime: string = new Date().toTimeString().substring(0, 5);
   errorMessage: string = '';
   enableEndTime: boolean = false;
-  bindEventToStartTime: boolean = false; // Flag to track whether to bind event time to start time
+  bindEventToStartTime: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<EventDialogComponent>,
@@ -27,7 +27,7 @@ export class EventDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.eventDate === this.currentDate) {
       const now = new Date();
-      now.setMinutes(now.getMinutes() + 30); // Default end time to 30 minutes after current time
+      now.setMinutes(now.getMinutes() + 30);
       this.endTime = now.toTimeString().substring(0, 5);
     }
   }
@@ -88,10 +88,10 @@ export class EventDialogComponent implements OnInit {
       this.eventTime = '';
       return;
     }
-    this.errorMessage = ''; // Clear the error message if time is valid
-    this.startTime = this.eventTime; // Sync start time with event time
+    this.errorMessage = '';
+    this.startTime = this.eventTime;
     this.enableEndTime = !!this.eventTime;
-    this.bindEventToStartTime = true; // Set flag to bind event time with start time
+    this.bindEventToStartTime = true;
   }
 
   onStartTimeChange(): void {
@@ -101,13 +101,13 @@ export class EventDialogComponent implements OnInit {
       this.enableEndTime = false;
       return;
     }
-    this.errorMessage = ''; // Clear the error message if time is valid
+    this.errorMessage = '';
     this.enableEndTime = !!this.startTime;
     if (!this.startTime) {
       this.endTime = '';
     }
     if (this.bindEventToStartTime) {
-      this.eventTime = this.startTime; // Sync event time with start time if bound
+      this.eventTime = this.startTime;
     }
   }
 

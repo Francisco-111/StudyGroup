@@ -63,11 +63,6 @@ export class ChatService {
     return this.userService.getUserEmailById(userId);
   }
 
-  getUserChats(userId: string): Observable<any[]> {
-    return this.firestore.collection('directChats', ref => ref.where('members', 'array-contains', userId)).valueChanges();
-  }
-
-
   private getChatId(senderId: string, receiverId: string): string {
     return senderId < receiverId ? senderId + '_' + receiverId : receiverId + '_' + senderId;
   }

@@ -22,13 +22,13 @@
   display: flex;
   justify-content: center;
   padding: 20px;
-  overflow-y: auto; /* Ensure vertical scrolling */
-  height: 80vh; /* Adjust the height to allow scrolling */
+  overflow-y: auto;
+  height: 80vh;
 }
 
 .calendar-container {
   width: 100%;
-  max-width: 1200px; /* Adjust the max-width as needed to make the calendar wider */
+  max-width: 1200px;
 }
 
 .fc-header-toolbar {

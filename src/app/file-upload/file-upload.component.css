@@ -18,7 +18,7 @@
 
 .file-section {
   width: 100%;
-  margin-top: 60px; /* Adjust the top margin as needed */
+  margin-top: 60px;
   position: relative;
 }
 
@@ -146,7 +146,7 @@
 }
 
 .files-scrollable {
-  max-height: 300px; /* Adjust this value as needed */
+  max-height: 300px;
   overflow-y: auto;
   padding: 10px;
   border: 1px solid #ddd;

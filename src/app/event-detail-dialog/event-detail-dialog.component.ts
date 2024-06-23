@@ -24,12 +24,12 @@ export class EventDetailDialogComponent implements OnInit {
   ngOnInit(): void {
     const event = this.data.event;
     this.eventName = event.title;
-    this.eventDate = new Date(event.start).toISOString().split('T')[0]; // Show only the date part
+    this.eventDate = new Date(event.start).toISOString().split('T')[0];
     this.eventTime = event.extendedProps.eventTime || 'N/A';
     this.startTime = event.extendedProps.startTime || 'N/A';
-    this.endTime = (event.end && event.end.split('T')[1]) ? event.end.split('T')[1].slice(0, 5) : 'N/A'; // Extract time part or set to 'N/A'
+    this.endTime = (event.end && event.end.split('T')[1]) ? event.end.split('T')[1].slice(0, 5) : 'N/A';
     this.eventDescription = event.extendedProps.description || 'N/A';
-    this.scheduledBy = event.extendedProps.scheduledBy || 'N/A'; // Assign the scheduler information
+    this.scheduledBy = event.extendedProps.scheduledBy || 'N/A';
   }
 
   onNoClick(): void {

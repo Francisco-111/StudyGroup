@@ -14,10 +14,10 @@ export class GroupComponent implements OnInit {
   groups: any[] = [];
   userEmail: string | null = '';
   groupName: string = '';
-  searchQuery: string = ''; // Add property for search query
+  searchQuery: string = '';
   createGroupErrorMessage: string = '';
-  successMessage: string = ''; // Add property for success message
-  isProcessing: boolean = false; // Add a flag to manage button state
+  successMessage: string = '';
+  isProcessing: boolean = false;
   private searchSubject: Subject<string> = new Subject();
 
   constructor(
@@ -103,7 +103,7 @@ export class GroupComponent implements OnInit {
     setTimeout(() => {
       this.successMessage = '';
       this.isProcessing = false;
-    }, 3000); // Add a delay before resetting isProcessing
+    }, 3000);
   }
 
   clearSuccessMessage() {
