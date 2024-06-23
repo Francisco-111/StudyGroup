@@ -46,15 +46,33 @@ export class GroupComponent implements OnInit {
   onCreateGroup() {
     if (this.userEmail && this.groupName.trim()) {
       this.isProcessing = true;
-      this.groupService.createGroup(this.groupName, this.userEmail).then(() => {
-        this.groupName = '';
-        this.displaySuccessMessage(`Group "${this.groupName}" was created`);
-      }).catch(error => {
-        this.createGroupErrorMessage = error.message;
-        this.isProcessing = false;
+      this.checkDuplicateGroupName(this.groupName).then(isDuplicate => {
+        if (isDuplicate) {
+          this.createGroupErrorMessage = `"${this.groupName}" already exists. Choose a different name.`;
+          this.isProcessing = false;
+        } else {
+          // @ts-ignore
+          this.groupService.createGroup(this.groupName, this.userEmail).then(() => {
+            this.groupName = '';
+            this.displaySuccessMessage(`Group "${this.groupName}" was created`);
+          }).catch(error => {
+            this.createGroupErrorMessage = error.message;
+            this.isProcessing = false;
+          });
+        }
       });
     }
   }
+  checkDuplicateGroupName(groupName: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.groupService.searchGroups(groupName).subscribe((data: any) => {
+        resolve(data.length > 0);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
 
   joinGroup(groupId: string) {
     if (this.userEmail && !this.isProcessing) {
