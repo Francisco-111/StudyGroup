@@ -8,21 +8,17 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { GroupChatComponent } from './group-chat/group-chat.component';
 import { DirectChatComponent } from './direct-chat/direct-chat.component';
-import { UserListComponent } from './user-list/user-list.component';
 import { AuthGuard } from './auth.guard';
-import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
   { path: 'groups', component: GroupComponent, canActivate: [AuthGuard] },
   { path: 'groups/:id/chat', component: GroupChatComponent, canActivate: [AuthGuard] },
   { path: 'groups/:id/file-upload', component: FileUploadComponent , canActivate: [AuthGuard] },
   { path: 'groups/:id/schedules', component: ScheduleComponent, canActivate: [AuthGuard] },
   { path: 'chat/:id', component: DirectChatComponent, canActivate: [AuthGuard] },
-  { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -1,13 +1,18 @@
-<!-- group.component.html -->
 <div class="group-container">
-  <div class="group-form">
-    <h2 class="header-center">Create Group</h2>
-    <form (ngSubmit)="onCreateGroup()">
-      <label for="groupName">Group Name:</label>
-      <input type="text" id="groupName" [(ngModel)]="groupName" name="groupName" required>
-      <button type="submit" class="create-btn">Create Group</button>
-    </form>
-    <div *ngIf="createGroupErrorMessage" class="error-message">{{ createGroupErrorMessage }}</div>
+  <div class="top-container">
+    <div class="search-container">
+      <h2 class="header-center">Search Groups</h2>
+      <input type="text" [(ngModel)]="searchQuery" (input)="onSearch(searchQuery)" placeholder="Search for a group">
+    </div>
+    <div class="group-form">
+      <h2 class="header-center">Create Group</h2>
+      <form (ngSubmit)="onCreateGroup()">
+        <label for="groupName">Group Name:</label>
+        <input type="text" id="groupName" [(ngModel)]="groupName" name="groupName" required>
+        <button type="submit" class="create-btn" [disabled]="isProcessing">Create Group</button>
+      </form>
+      <div *ngIf="createGroupErrorMessage" class="error-message">{{ createGroupErrorMessage }}</div>
+    </div>
   </div>
   <div class="group-list">
     <h2 class="header-center">Groups</h2>
@@ -19,13 +24,16 @@
             <button (click)="navigateToGroupChat(group.id)">Chat</button>
             <button (click)="navigateToFileUpload(group.id)">File Upload</button>
             <button (click)="navigateToGroupSchedules(group.id)">Schedules</button>
-            <button (click)="leaveGroup(group.id)">Leave Group</button>
+            <button (click)="leaveGroup(group.id)" [disabled]="isProcessing">Leave Group</button>
           </ng-container>
           <ng-template #notMember>
-            <button (click)="joinGroup(group.id)">Join Group</button>
+            <button (click)="joinGroup(group.id)" [disabled]="isProcessing">Join Group</button>
           </ng-template>
         </div>
       </li>
     </ul>
+  </div>
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
   </div>
 </div>

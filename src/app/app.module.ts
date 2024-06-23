@@ -9,7 +9,6 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { GroupChatComponent } from './group-chat/group-chat.component';
 import { DirectChatComponent } from './direct-chat/direct-chat.component';
-import { UserListComponent } from './user-list/user-list.component';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
@@ -23,7 +22,6 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {HomeComponent} from "./home/home.component";
-import {ProfileComponent} from "./profile/profile.component";
 import { FullCalendarModule } from '@fullcalendar/angular';
 import {EventDialogComponent} from "./event-dialog/event-dialog.component";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -44,9 +42,7 @@ import {EventDetailDialogComponent} from "./event-detail-dialog/event-detail-dia
     FileUploadComponent,
     GroupChatComponent,
     DirectChatComponent,
-    UserListComponent,
     HomeComponent,
-    ProfileComponent,
     EventDialogComponent,
     EventDetailDialogComponent,
 

@@ -29,15 +29,6 @@ export class GroupService {
     );
   }
 
-  getUserGroups(userEmail: string): Observable<any[]> {
-    return this.firestore.collection('groups', ref => ref.where('members', 'array-contains', userEmail)).snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as any;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
-  }
 
   joinGroup(groupId: string, userEmail: string) {
     return this.firestore.collection('groups').doc(groupId).update({
@@ -49,5 +40,14 @@ export class GroupService {
     return this.firestore.collection('groups').doc(groupId).update({
       members: firebase.firestore.FieldValue.arrayRemove(userEmail)
     });
+  }
+  searchGroups(query: string): Observable<any[]> {
+    return this.firestore.collection('groups', ref => ref.where('groupName', '>=', query).where('groupName', '<=', query + '\uf8ff')).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as any;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
   }
 }

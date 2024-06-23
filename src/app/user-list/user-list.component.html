@@ -1,9 +1,0 @@
-<div class="user-list-container">
-  <h2>Your Contacts</h2>
-  <ul>
-    <li *ngFor="let user of users">
-      {{ user.name }} - {{ user.email }}
-      <a [routerLink]="['/chat', user.id]">Chat</a>
-    </li>
-  </ul>
-</div>
