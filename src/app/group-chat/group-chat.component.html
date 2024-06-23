@@ -3,14 +3,23 @@
 
   <div *ngIf="userEmail">
     <div class="chat-header">
-      <span *ngIf="messages.length > 0" class="select-message-info">Select message to delete</span>
       <h2>Group Chat</h2>
-      <button *ngIf="selectedMessages.size > 0" (click)="deleteSelectedMessages()" class="delete-button">Delete Selected</button>
+      <div class="button-group">
+        <button *ngIf="!selectingMessages && userMessagesExist" (click)="toggleSelectingMessages()" class="toggle-selection-button blue-button">
+          Click to select messages to delete
+        </button>
+        <button *ngIf="selectingMessages && selectedMessages.size > 0" (click)="deleteSelectedMessages()" class="confirm-button red-button">
+          Confirm Delete
+        </button>
+        <button *ngIf="selectingMessages" (click)="cancelSelection()" class="cancel-button gray-button">
+          Cancel
+        </button>
+      </div>
     </div>
     <div class="chat-window">
       <div *ngFor="let message of messages" class="message">
         <div class="message-header">
-          <input type="checkbox" (change)="toggleMessageSelection(message.id)" class="select-checkbox"/>
+          <input *ngIf="selectingMessages && message.sender === userEmail" type="checkbox" (change)="toggleMessageSelection(message.id)" class="select-checkbox"/>
           <strong class="message-sender">{{ message.sender }}</strong>
           <span class="timestamp">{{ message.formattedTimestamp }}</span>
         </div>

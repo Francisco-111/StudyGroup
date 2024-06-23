@@ -16,6 +16,8 @@ export class GroupChatComponent implements OnInit {
   userEmail: string | null = '';
   errorMessage: string = '';
   selectedMessages: Set<string> = new Set();
+  selectingMessages: boolean = false;
+  userMessagesExist: boolean = false;
 
   constructor(
     private chatService: ChatService,
@@ -26,6 +28,9 @@ export class GroupChatComponent implements OnInit {
     this.groupId = this.route.snapshot.paramMap.get('id') || '';
     this.authService.afAuth.authState.subscribe(user => {
       this.userEmail = user?.email || '';
+      if (this.userEmail) {
+        this.checkUserMessagesExist();
+      }
     });
   }
 
@@ -35,16 +40,20 @@ export class GroupChatComponent implements OnInit {
     }
   }
 
+  checkUserMessagesExist() {
+    this.chatService.getMessages(this.groupId).subscribe((data: any) => {
+      this.userMessagesExist = data.some((msg: any) => msg.sender === this.userEmail);
+    });
+  }
+
   loadMessages() {
     this.chatService.getMessages(this.groupId).subscribe((data: any) => {
-      console.log('Loaded messages:', data);
       this.messages = data.map((msg: any) => ({
         ...msg,
         formattedTimestamp: this.formatTimestamp(msg.timestamp)
       }));
-      console.log('Formatted messages:', this.messages);
     }, error => {
-      console.error('Error loading messages:', error);
+      this.errorMessage = 'Error loading messages: ' + error.message;
     });
   }
 
@@ -55,7 +64,6 @@ export class GroupChatComponent implements OnInit {
         sender: this.userEmail,
         timestamp: new Date().toISOString()
       };
-      console.log('Sending message:', message);
       this.chatService.sendMessage(this.groupId, message).then(
         () => {
           this.messageText = '';
@@ -87,6 +95,19 @@ export class GroupChatComponent implements OnInit {
         }
       );
     });
+    this.selectedMessages.clear();
+    this.selectingMessages = false;
+  }
+
+  toggleSelectingMessages() {
+    this.selectingMessages = !this.selectingMessages;
+    if (!this.selectingMessages) {
+      this.selectedMessages.clear();
+    }
+  }
+
+  cancelSelection() {
+    this.selectingMessages = false;
     this.selectedMessages.clear();
   }
 
