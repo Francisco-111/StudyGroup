@@ -67,13 +67,12 @@ export class EventDialogComponent implements OnInit {
   }
 
   onSave(): void {
-    // Use 'N/A' if the user did not provide input
     const schedule = {
       eventName: this.eventName,
       eventDate: this.data.eventDate,
       eventTime: this.eventTime || 'N/A',
       startTime: this.startTime || 'N/A',
-      endTime: (this.endTime && this.endTime !== new Date().toTimeString().substring(0, 5)) ? this.endTime : 'N/A',
+      endTime: this.endTime || 'N/A',
       eventDescription: this.eventDescription || 'N/A'
     };
 

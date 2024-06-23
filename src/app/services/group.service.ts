@@ -42,12 +42,10 @@ export class GroupService {
     });
   }
   searchGroups(query: string): Observable<any[]> {
-    return this.firestore.collection('groups', ref => ref.where('groupName', '>=', query).where('groupName', '<=', query + '\uf8ff')).snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as any;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
+    return this.getGroups().pipe(
+      map(groups => groups.filter(group =>
+        group.groupName.toLowerCase().includes(query.toLowerCase())
+      ))
     );
   }
 }

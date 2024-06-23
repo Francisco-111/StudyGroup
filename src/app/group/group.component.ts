@@ -63,16 +63,20 @@ export class GroupComponent implements OnInit {
       });
     }
   }
+
   checkDuplicateGroupName(groupName: string): Promise<boolean> {
+    const normalizedGroupName = groupName.trim().toLowerCase();
     return new Promise((resolve, reject) => {
-      this.groupService.searchGroups(groupName).subscribe((data: any) => {
-        resolve(data.length > 0);
+      this.groupService.searchGroups(normalizedGroupName).subscribe((data: any) => {
+        const isDuplicate = data.some((group: any) =>
+          group.groupName.toLowerCase() === normalizedGroupName
+        );
+        resolve(isDuplicate);
       }, error => {
         reject(error);
       });
     });
   }
-
 
   joinGroup(groupId: string) {
     if (this.userEmail && !this.isProcessing) {
@@ -103,12 +107,7 @@ export class GroupComponent implements OnInit {
     setTimeout(() => {
       this.successMessage = '';
       this.isProcessing = false;
-    }, 3000);
-  }
-
-  clearSuccessMessage() {
-    this.successMessage = '';
-    this.isProcessing = false;
+    }, 2000);
   }
 
   navigateToGroupChat(groupId: string) {
@@ -128,8 +127,9 @@ export class GroupComponent implements OnInit {
   }
 
   performSearch(query: string) {
-    if (query.trim()) {
-      this.groupService.searchGroups(query).subscribe((data: any) => {
+    const normalizedQuery = query.trim().toLowerCase();
+    if (normalizedQuery) {
+      this.groupService.searchGroups(normalizedQuery).subscribe((data: any) => {
         this.groups = data;
       });
     } else {
