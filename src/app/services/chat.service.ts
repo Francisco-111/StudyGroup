@@ -63,6 +63,10 @@ export class ChatService {
     return this.userService.getUserEmailById(userId);
   }
 
+  searchUsers(query: string): Observable<any[]> {
+    return this.userService.searchUsers(query);
+  }
+
   private getChatId(senderId: string, receiverId: string): string {
     return senderId < receiverId ? senderId + '_' + receiverId : receiverId + '_' + senderId;
   }

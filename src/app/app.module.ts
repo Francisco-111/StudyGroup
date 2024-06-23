@@ -8,7 +8,6 @@ import { GroupComponent } from './group/group.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { GroupChatComponent } from './group-chat/group-chat.component';
-import { DirectChatComponent } from './direct-chat/direct-chat.component';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
@@ -41,7 +40,6 @@ import {EventDetailDialogComponent} from "./event-detail-dialog/event-detail-dia
     ScheduleComponent,
     FileUploadComponent,
     GroupChatComponent,
-    DirectChatComponent,
     HomeComponent,
     EventDialogComponent,
     EventDetailDialogComponent,

@@ -17,7 +17,7 @@ export class RegisterComponent {
   onRegister() {
     this.authService.register(this.email, this.password).then(
       () => {
-        this.router.navigate(['/groups']);
+        this.router.navigate(['']);
       },
       (error) => {
         this.errorMessage = error.message;

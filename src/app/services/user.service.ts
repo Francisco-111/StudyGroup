@@ -29,4 +29,16 @@ export class UserService {
       })
     );
   }
+  searchUsers(query: string): Observable<any[]> {
+    return this.firestore.collection('users', ref =>
+      ref.orderBy('email').startAt(query).endAt(query + '\uf8ff')
+    ).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        // @ts-ignore
+        return { id, ...data };
+      }))
+    );
+  }
 }
