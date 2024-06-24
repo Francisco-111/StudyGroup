@@ -14,7 +14,6 @@ import { AuthService } from './services/auth.service';
 import { GroupService } from './services/group.service';
 import { ScheduleService } from './services/schedule.service';
 import { ChatService } from './services/chat.service';
-import { UserService } from './services/user.service';
 import { AuthGuard } from './auth.guard';
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
@@ -70,7 +69,6 @@ import {EventDetailDialogComponent} from "./event-detail-dialog/event-detail-dia
     GroupService,
     ScheduleService,
     ChatService,
-    UserService,
     AuthGuard,
     provideAnimationsAsync()
   ],

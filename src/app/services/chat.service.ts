@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import { UserService } from './user.service';
 import {map} from "rxjs/operators";
 
 @Injectable({
@@ -11,8 +9,6 @@ import {map} from "rxjs/operators";
 export class ChatService {
   constructor(
     private firestore: AngularFirestore,
-    private storage: AngularFireStorage,
-    private userService: UserService
   ) {}
 
   sendMessage(groupId: string, message: any) {
@@ -44,32 +40,10 @@ export class ChatService {
     );
   }
 
-
   addFileRecord(groupId: string, fileRecord: any) {
     return this.firestore.collection('groups/' + groupId + '/files').add(fileRecord);
   }
 
-  sendDirectMessage(senderId: string, receiverId: string, message: any) {
-    const chatId = this.getChatId(senderId, receiverId);
-    return this.firestore.collection('directChats/' + chatId + '/messages').add(message);
-  }
-
-  getDirectMessages(senderId: string, receiverId: string): Observable<any[]> {
-    const chatId = this.getChatId(senderId, receiverId);
-    return this.firestore.collection('directChats/' + chatId + '/messages', ref => ref.orderBy('timestamp')).valueChanges();
-  }
-
-  getUserEmailById(userId: string): Observable<string> {
-    return this.userService.getUserEmailById(userId);
-  }
-
-  searchUsers(query: string): Observable<any[]> {
-    return this.userService.searchUsers(query);
-  }
-
-  private getChatId(senderId: string, receiverId: string): string {
-    return senderId < receiverId ? senderId + '_' + receiverId : receiverId + '_' + senderId;
-  }
   deleteMessage(groupId: string, messageId: string) {
     return this.firestore.collection(`groups/${groupId}/messages`).doc(messageId).delete();
   }
