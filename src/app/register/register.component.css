@@ -1,36 +1,62 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Gradient background */
+  color: #333;
+}
+
 .login-container, .register-container {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
+  background: white;
   border: 1px solid #ccc;
   border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
   text-align: center;
+  color: #007bff;
 }
 
-div {
-  margin-bottom: 10px;
+.form-group {
+  margin-bottom: 15px;
 }
 
 label {
   display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 input {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-button {
+button.primary-button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button.primary-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 .error-message {
@@ -38,6 +64,7 @@ button {
   text-align: center;
   margin-top: 10px;
 }
+
 .link-container {
   margin-top: 10px;
   text-align: center;
@@ -46,6 +73,7 @@ button {
 .link-container a {
   color: #007bff;
   text-decoration: none;
+  transition: text-decoration 0.3s ease;
 }
 
 .link-container a:hover {

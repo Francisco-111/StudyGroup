@@ -21,13 +21,13 @@
         {{ group.groupName }} - Members: {{ group.members.length }}
         <div class="group-actions">
           <ng-container *ngIf="group.members.includes(userEmail); else notMember">
-            <button (click)="navigateToGroupChat(group.id)">Chat</button>
-            <button (click)="navigateToFileUpload(group.id)">File Upload</button>
-            <button (click)="navigateToGroupSchedules(group.id)">Schedules</button>
-            <button (click)="leaveGroup(group.id)" [disabled]="isProcessing">Leave Group</button>
+            <button (click)="navigateToGroupChat(group.id)" class="action-btn">Chat</button>
+            <button (click)="navigateToFileUpload(group.id)" class="action-btn">File Upload</button>
+            <button (click)="navigateToGroupSchedules(group.id)" class="action-btn">Schedules</button>
+            <button (click)="leaveGroup(group.id)" [disabled]="isProcessing" class="action-btn danger-btn">Leave Group</button>
           </ng-container>
           <ng-template #notMember>
-            <button (click)="joinGroup(group.id)" [disabled]="isProcessing">Join Group</button>
+            <button (click)="joinGroup(group.id)" [disabled]="isProcessing" class="action-btn success-btn">Join Group</button>
           </ng-template>
         </div>
       </li>

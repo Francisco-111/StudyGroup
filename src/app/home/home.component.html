@@ -2,8 +2,8 @@
   <div class="home-container">
     <h1>Welcome to Study Group Website</h1>
     <div class="button-container">
-      <button routerLink="/groups">Groups</button>
-      <button (click)="authService.logout()">Logout</button>
+      <button routerLink="/groups" class="primary-button">Groups</button>
+      <button (click)="authService.logout()" class="secondary-button">Logout</button>
     </div>
   </div>
 </div>
@@ -11,8 +11,8 @@
   <div class="home-container">
     <h1>Welcome to Study Group Website</h1>
     <div class="button-container">
-      <button routerLink="/login">Login</button>
-      <button routerLink="/register">Register</button>
+      <button routerLink="/login" class="primary-button">Login</button>
+      <button routerLink="/register" class="secondary-button">Register</button>
     </div>
   </div>
 </ng-template>

@@ -50,11 +50,14 @@ export class GroupComponent implements OnInit {
         if (isDuplicate) {
           this.createGroupErrorMessage = `"${this.groupName}" already exists. Choose a different name.`;
           this.isProcessing = false;
+          setTimeout(() => {
+            this.createGroupErrorMessage = '';
+          }, 3000);
         } else {
           // @ts-ignore
           this.groupService.createGroup(this.groupName, this.userEmail).then(() => {
-            this.groupName = '';
             this.displaySuccessMessage(`Group "${this.groupName}" was created`);
+            this.groupName = '';
           }).catch(error => {
             this.createGroupErrorMessage = error.message;
             this.isProcessing = false;

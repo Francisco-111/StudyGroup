@@ -12,7 +12,7 @@ export class EventDetailDialogComponent implements OnInit {
   eventDate: string = '';
   eventTime: string = 'N/A';
   startTime: string = 'N/A';
-  endTime: string = 'N/A';
+  endTime: string = 'N/A'
   eventDescription: string = 'N/A';
   scheduledBy: string = 'N/A';
 

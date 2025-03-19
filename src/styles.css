@@ -1,10 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
-body {
+
+body, html {
+  height: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb) !important;
+  color: #333;
 }
 
+/* Example styles for navigation */
 nav {
   background-color: #000000;
   padding: 10px;
@@ -19,6 +23,3 @@ nav a {
 nav a:hover {
   text-decoration: underline;
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

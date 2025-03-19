@@ -76,6 +76,7 @@ body, html {
 
 .sidenav ul.logout-item li a {
   color: #ff0000;
+  cursor: pointer;
 }
 
 .main {
